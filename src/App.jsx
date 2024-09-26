@@ -3,14 +3,17 @@ import { useEffect } from "react";
 
 import PublicLayout from "./layouts/PublicLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
+import PageTitle from "./components/PageTitle";
 
 import HomePage from "./pages/public/HomePage";
+import AboutPage from "./pages/public/AboutPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
+import HelpPage from "./pages/public/HelpPage";
 
 const isAuthenticated = () => {
-  return !!localStorage.getItem("authToken");
+  return !!sessionStorage.getItem("authToken");
 };
 
 const App = () => {
@@ -27,23 +30,56 @@ const App = () => {
       <Route
         path="/"
         element={
-          <PublicLayout>
-            <HomePage />
-          </PublicLayout>
+          <>
+            <PageTitle title={"Pemodal | Patani"} />
+            <PublicLayout>
+              <HomePage />
+            </PublicLayout>
+          </>
         }
       />
       <Route
         path="/about"
         element={
-          <PublicLayout>
-            <HomePage />
-          </PublicLayout>
+          <>
+            <PageTitle title={"Tentang Kami | Patani"} />
+            <PublicLayout>
+              <AboutPage />
+            </PublicLayout>
+          </>
+        }
+      />
+      <Route
+        path="/help"
+        element={
+          <>
+            <PageTitle title={"Bantuan | Patani"} />
+            <PublicLayout>
+              <HelpPage />
+            </PublicLayout>
+          </>
         }
       />
 
       {/* Halaman Login */}
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+      <Route
+        path="/login"
+        element={
+          <>
+            <PageTitle title={"Masuk | Patani"} />
+            <LoginPage />
+          </>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <>
+            <PageTitle title={"Daftar | Patani"} />
+            <RegisterPage />
+          </>
+        }
+      />
 
       {/* Halaman Dashboard */}
       <Route

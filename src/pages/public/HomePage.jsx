@@ -1,20 +1,13 @@
-import images from "../../images/images.jsx";
-
 const HomePage = () => {
-  
   return (
     <>
-      <div className=" flex items-center justify-center mt-24">
-        <div className="absolute top-[82px] h-56 inset-0 bg-black opacity-50 z-0"></div>
+      <div className="bg-gray-100">
         <img
-          loading="lazy"
-          src={images.riceField}
-          className="w-screen h-56 absolute left-0 object-cover object-center -z-10 shadow-md"
-          alt="riceField"
+          className="w-52 h-auto pt-96"
+          src="../../public/Logo.svg"
+          alt="kosong"
         />
-        <h1 className="text-3xl font-bold z-10 text-white">Tentang Kami</h1>
       </div>
-      <div className="mt-32">halo dunia</div>
     </>
   );
 };
