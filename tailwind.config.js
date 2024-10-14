@@ -13,6 +13,7 @@ export default {
         'orangePrimary' : '#e26b13',
         'orangeSecondary' : '#b9580e',
         'greenPrimary' : '#16423C',
+        'greenSecondary' : '#1a4b45',
       }
     },
   },

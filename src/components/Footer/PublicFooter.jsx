@@ -24,8 +24,8 @@ const Footer = () => {
     { name: "Bantuan", href: "/help" },
   ];
   return (
-    <footer className="bg-gradient-to-r from-[#276964] to-[#a3c49c] text-white py-8">
-      <div className="container mx-auto px-4">
+    <footer className="bg-greenPrimary text-white py-8">
+      <div className="container mx-auto px-2.5 md:px-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo & Slogan */}
           <div>

@@ -1,0 +1,125 @@
+{
+    "data": [
+      {
+        "name": "Pertanian Sinar Jaya",
+        "type": "Pertanian",
+        "location": "Jawa Barat",
+        "profit": "5,7%"
+      },
+      {
+        "name": "Perikanan Bahari",
+        "type": "Perikanan",
+        "location": "Jawa Timur",
+        "profit": "6,2%"
+      },
+      {
+        "name": "Teknologi Masa Depan",
+        "type": "Perikanan",
+        "location": "Jakarta",
+        "profit": "12%"
+      },
+      {
+        "name": "Agro Industri",
+        "type": "Pertanian",
+        "location": "Bali",
+        "profit": "7%"
+      },
+      {
+        "name": "Properti Maju",
+        "type": "Pertanian",
+        "location": "Jawa Tengah",
+        "profit": "10%"
+      },
+      {
+        "name": "Tambang Nusantara",
+        "type": "Peternakan",
+        "location": "Kalimantan",
+        "profit": "8,5%"
+      },
+      {
+        "name": "Pertanian Mandiri",
+        "type": "Pertanian",
+        "location": "Sumatra Barat",
+        "profit": "6%"
+      },
+      {
+        "name": "Perikanan Laut Jaya",
+        "type": "Perikanan",
+        "location": "Sulawesi Selatan",
+        "profit": "7,5%"
+      },
+      {
+        "name": "Peternakan Sejahtera",
+        "type": "Peternakan",
+        "location": "Papua",
+        "profit": "9%"
+      },
+      {
+        "name": "Pertanian Hijau",
+        "type": "Pertanian",
+        "location": "Aceh",
+        "profit": "4,5%"
+      },
+      {
+        "name": "Perikanan Samudera",
+        "type": "Perikanan",
+        "location": "Banten",
+        "profit": "5,8%"
+      },
+      {
+        "name": "Peternakan Makmur",
+        "type": "Peternakan",
+        "location": "Lampung",
+        "profit": "7,3%"
+      },
+      {
+        "name": "Pertanian Bersama",
+        "type": "Pertanian",
+        "location": "Yogyakarta",
+        "profit": "8%"
+      },
+      {
+        "name": "Perikanan Nusantara",
+        "type": "Perikanan",
+        "location": "Kalimantan Barat",
+        "profit": "6,5%"
+      },
+      {
+        "name": "Peternakan Rakyat",
+        "type": "Peternakan",
+        "location": "NTT",
+        "profit": "8,8%"
+      },
+      {
+        "name": "Pertanian Subur",
+        "type": "Pertanian",
+        "location": "Jambi",
+        "profit": "9%"
+      },
+      {
+        "name": "Perikanan Mega",
+        "type": "Perikanan",
+        "location": "Maluku",
+        "profit": "7%"
+      },
+      {
+        "name": "Peternakan Nusantara",
+        "type": "Peternakan",
+        "location": "Bengkulu",
+        "profit": "10%"
+      },
+      {
+        "name": "Pertanian Emas",
+        "type": "Pertanian",
+        "location": "Sumatra Utara",
+        "profit": "6,8%"
+      },
+      {
+        "name": "Perikanan Bahari Sejahtera",
+        "type": "Perikanan",
+        "location": "Bali",
+        "profit": "8%"
+      }
+    ]
+  }
+  

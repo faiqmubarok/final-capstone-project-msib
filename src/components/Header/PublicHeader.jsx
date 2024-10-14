@@ -13,9 +13,9 @@ const Header = ({ onSidebarOpen }) => {
 
   return (
     <>
-      <nav className="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Logo/>
+      <nav className="bg-white fixed w-full z-30  top-0 start-0 border-b border-gray-200 drop-shadow-sm">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4 px-2.5 md:px-4 lg:px-8">
+          <Logo link={"/dashboard"}/>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <Link
               to={"/login"}

@@ -1,24 +1,38 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-
-import PublicLayout from "./layouts/PublicLayout";
-import DashboardLayout from "./layouts/DashboardLayout";
 import PageTitle from "./components/PageTitle";
 
+// Layout
+import PublicLayout from "./layouts/PublicLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
+import AdminLayout from "./layouts/AdminLayout";
+
+// Public Pages
 import HomePage from "./pages/public/HomePage";
+import CostumerPage from "./pages/public/CostumerPage";
 import AboutPage from "./pages/public/AboutPage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import DashboardPage from "./pages/DashboardPage";
 import HelpPage from "./pages/public/HelpPage";
 
-const isAuthenticated = () => {
-  return !!sessionStorage.getItem("authToken");
-};
+// Auth
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
+
+// Investor Pages
+import DashboardPage from "./pages/investor/DashboardPage";
+import ProjectPage from "./pages/investor/ProjectPage";
+import Transaction from "./pages/investor/Transaction";
+
+// Admin Pages
+import DashboardAdmin from "./pages/admin/DashboardAdmin";
+
+// const isAuthenticated = () => {
+//   return !!sessionStorage.getItem("authToken");
+// };
 
 const App = () => {
   const { pathname } = useLocation();
-  const userIsLoggedIn = isAuthenticated();
+  const userIsLoggedIn = true;
+  const adminIsLoggedIn = true;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -34,6 +48,17 @@ const App = () => {
             <PageTitle title={"Pemodal | Patani"} />
             <PublicLayout>
               <HomePage />
+            </PublicLayout>
+          </>
+        }
+      />
+      <Route
+        path="/costumer"
+        element={
+          <>
+            <PageTitle title={"Peminjam | Patani"} />
+            <PublicLayout>
+              <CostumerPage />
             </PublicLayout>
           </>
         }
@@ -87,12 +112,55 @@ const App = () => {
         element={
           userIsLoggedIn ? (
             <DashboardLayout>
+              <PageTitle title={"Dashboard | Patani"} />
               <DashboardPage />
             </DashboardLayout>
           ) : (
             <LoginPage />
           )
         }
+      />
+      <Route
+        path="/project"
+        element={
+          userIsLoggedIn ? (
+            <DashboardLayout>
+              <PageTitle title={"Proyek | Patani"} />
+              <ProjectPage />
+            </DashboardLayout>
+          ) : (
+            <LoginPage />
+          )
+        }
+      />
+      <Route
+        path="/transaction"
+        element={
+          userIsLoggedIn ? (
+            <DashboardLayout>
+              <PageTitle title={"Transaksi | Patani"} />
+              <Transaction />
+            </DashboardLayout>
+          ) : (
+            <LoginPage />
+          )
+        }
+      />
+      
+      {/* Halaman Admin */}
+      <Route 
+      path="/dashboard-admin"
+      element={
+        adminIsLoggedIn ? (
+          <AdminLayout>
+            <PageTitle title={"Admin | Patani"} />
+            <DashboardAdmin />
+          </AdminLayout>
+        ) : (
+          <LoginPage />
+        )
+      }
+
       />
     </Routes>
   );

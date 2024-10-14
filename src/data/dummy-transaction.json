@@ -1,0 +1,25 @@
+{
+  "transaction": [
+    {
+      "id": 1,
+      "projectName": "Proyek Padi Organik",
+      "investmentAmount": 5000000,
+      "transactionDate": "2024-10-14",
+      "status": "Sukses"
+    },
+    {
+      "id": 2,
+      "projectName": "Proyek Kebun Jeruk",
+      "investmentAmount": 3000000,
+      "transactionDate": "2024-09-30",
+      "status": "Pending"
+    },
+    {
+      "id": 3,
+      "projectName": "Proyek Perikanan Air Tawar",
+      "investmentAmount": 7000000,
+      "transactionDate": "2024-08-20",
+      "status": "Sukses"
+    }
+  ]
+}

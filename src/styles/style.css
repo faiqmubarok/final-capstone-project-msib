@@ -1,0 +1,14 @@
+.dashboard-body {
+  background-color: #F1F5F9;
+}
+
+/* Menghilangkan scrollbar di semua browser utama */
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;      /* Firefox */
+}
+

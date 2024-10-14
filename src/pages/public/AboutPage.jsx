@@ -36,7 +36,7 @@ const AboutPage = () => {
       </div>
 
       {/* Tentang */}
-      <section className="mt-32 text-sm text-justify space-y-4 max-w-screen-md mx-auto leading-6 mb-5">
+      <section className="mt-32 text-sm text-justify space-y-4 max-w-screen-md mx-auto leading-6 mb-5 px-2.5">
         <p>
           Indonesia, dikenal juga sebagai &quot;Zamrud Khatulistiwa,&quot;
           memiliki potensi agrikultur yang luar biasa. Namun, sektor ini masih
@@ -63,20 +63,32 @@ const AboutPage = () => {
       </section>
 
       {/* Visi & Misi */}
-      <section className="w-full rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6 text-sm mb-10 py-8  px-2.5 md:px-4 lg:px-8 max-w-screen-xl mx-auto">
+      <section className="w-full py-12 max-w-screen-xl px-2.5 md:px-4 lg:px-8 mx-auto flex flex-col text-sm relative">
+        {/* Dekorasi bubble di seluruh background */}
+        <div className="absolute inset-0 overflow-hidden z-0">
+          {/* Bubble besar */}
+          <div className="absolute top-1/4 right-0 w-40 h-40 bg-orangePrimary opacity-20 rounded-full"></div>
+          <div className="absolute top-1/3 left-0 w-32 h-32 bg-orangeSecondary opacity-20 rounded-full"></div>
+
+          {/* Bubble kecil */}
+          <div className="absolute bottom-1/4 right-1/3 w-16 h-16 bg-orangePrimary opacity-10 rounded-full"></div>
+          <div className="absolute top-1/2 left-1/4 w-12 h-12 bg-orangeSecondary opacity-10 rounded-full"></div>
+          <div className="absolute bottom-0 left-1/2 w-24 h-24 bg-orangePrimary opacity-10 rounded-full"></div>
+        </div>
+
         {/* Visi */}
-        <article className="p-8 text-center bg-transparent border border-[#e26b13]  rounded-lg flex items-center justify-center flex-col">
-          <h2 className="font-bold text-2xl mb-4 text-[#e26b13]">Visi</h2>
-          <p className="text-gray-700 text-lg">
+        <div className="mb-10 p-8 bg-white shadow-lg rounded-lg text-left self-start ml-0 md:mr-auto border-l-4 max-w-screen-md border-[#e26b13] relative z-10">
+          <h2 className="text-4xl font-semibold mb-4 text-[#e26b13]">Visi</h2>
+          <p className="text-gray-600 leading-relaxed">
             Mewujudkan ekosistem agrikultur Indonesia yang inklusif, mandiri,
-            dan berkelanjutan
+            dan berkelanjutan.
           </p>
-        </article>
+        </div>
 
         {/* Misi */}
-        <article className="p-8 bg-transparent border border-[#e26b13] rounded-lg flex items-center justify-center flex-col">
-          <h2 className="font-bold text-2xl mb-4 text-[#e26b13]">Misi</h2>
-          <ol className="list-decimal list-inside text-left text-gray-700 space-y-2">
+        <div className="p-8 bg-white shadow-lg rounded-lg text-left self-end mr-0 md:ml-auto border-r-4 max-w-screen-md border-[#e26b13] relative z-10">
+          <h2 className="text-4xl font-semibold mb-6 text-[#e26b13]">Misi</h2>
+          <ul className="text-gray-600 space-y-4 leading-relaxed">
             <li>
               Meningkatkan kesejahteraan pekerja agrikultur melalui akses
               teknologi, pembiayaan, dan pasar.
@@ -93,16 +105,12 @@ const AboutPage = () => {
               Membangun kepercayaan masyarakat terhadap sektor agrikultur dengan
               transparansi dan keberlanjutan.
             </li>
-            <li>
-              Mendukung pencapaian SDGs untuk masa depan agrikultur yang lebih
-              baik dan berkelanjutan.
-            </li>
-          </ol>
-        </article>
+          </ul>
+        </div>
       </section>
 
       {/* Contribute */}
-      <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2.5 md:px-4 lg:px-8 max-w-screen-xl mx-auto mb-24">
+      <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2.5 md:px-4 lg:px-8 max-w-screen-xl mx-auto mb-24 py-16">
         <h1 className="col-span-1 md:col-span-2 lg:col-span-3 text-center text-xl font-bold mb-3">
           Dalam Mendukung Pencapaian Tujuan Pembangunan Berkelanjutan
         </h1>

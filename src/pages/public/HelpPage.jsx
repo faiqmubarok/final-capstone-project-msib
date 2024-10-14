@@ -4,7 +4,9 @@ import images from "../../images/images";
 const HelpPage = () => {
   return (
     <>
-      <div className="w-full bg-gradient-to-r from-[#276964] to-[#a3c49c]  pt-24 bg-black">
+      <div className=" bg-gradient-to-r from-orangeSecondary to-greenPrimary text-white text-center relative overflow-hidden w-full pt-24">
+        <div className="absolute inset-0 bg-pattern opacity-10"></div>
+
         <div className="max-w-screen-xl px-3 md:px-4 lg:px-8 flex gap-6 justify-between mx-auto items-center py-8">
           <h1 className="text-lg lg:text-3xl font-bold text-white text-start ">
             Halo Sobat Agri Butuh Bantuan?
@@ -15,6 +17,9 @@ const HelpPage = () => {
             alt=""
           />
         </div>
+
+        <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-10 rounded-full w-80 h-80"></div>
+        <div className="absolute bottom-0 left-0 transform -translate-x-1/2 translate-y-1/2 bg-white bg-opacity-10 rounded-full w-80 h-80"></div>
       </div>
 
       <div className="flex flex-col lg:flex-row justify-between gap-6 px-2.5 md:px-4 lg:px-8 py-12 max-w-screen-xl mx-auto">

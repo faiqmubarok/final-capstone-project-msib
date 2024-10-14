@@ -18,7 +18,7 @@ const DefaultLayout = ({ children }) => {
   return (
     <>
       <PublicHeader onSidebarOpen={handleOpenSidebar} />
-      <main className="mx-auto   font-poppins">
+      <main className="mx-auto font-poppins">
         {/* px-2.5 md:px-4 lg:px-8 py-24 max-w-screen-xl */}
         {children}
       </main>
