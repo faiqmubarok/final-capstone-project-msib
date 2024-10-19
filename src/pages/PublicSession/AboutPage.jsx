@@ -25,7 +25,7 @@ const AboutPage = () => {
   return (
     <>
       <div className=" flex items-center justify-center mt-48">
-        <div className="absolute top-[98px] h-56 inset-0 bg-black opacity-50 z-0"></div>
+        <div className="absolute top-[98px] h-56 inset-0 bg-[#000] opacity-50 z-0"></div>
         <img
           loading="lazy"
           src={images.riceField}
@@ -36,27 +36,29 @@ const AboutPage = () => {
       </div>
 
       {/* Tentang */}
-      <section className="mt-32 text-sm text-justify space-y-4 max-w-screen-md mx-auto leading-6 mb-5 px-2.5">
-        <p>
-          Indonesia, dikenal juga sebagai &quot;Zamrud Khatulistiwa,&quot;
-          memiliki potensi agrikultur yang luar biasa. Namun, sektor ini masih
-          dibelenggu oleh pelbagai masalah. Akibatnya, pekerja agrikultur
-          seperti petani, nelayan, dan peternak menerima belum merata sejahtera
-          dan Indonesia masih ketergantungan impor bahan pangan. Padahal, di
-          situasi global kedepannya, ketahanan pangan adalah kunci untuk
-          keutuhan bangsa dan negara.
-        </p>
-        <p>
-          Bersama PATANI, kita bisa menciptakan perubahan yang lebih besar bagi
-          seluruh pekerja sektor agrikultur di Indonesia. Kami percaya bahwa
-          dengan memberikan kesempatan bagi mereka untuk mengembangkan bisnis
-          dan inovasi, kita dapat memperkuat sektor ini sambil memupuk
-          kepercayaan masyarakat. Lebih dari itu, PATANI berkomitmen untuk
-          mewujudkan pertumbuhan ekonomi yang inklusif dan berkelanjutan,
-          sejalan dengan pencapaian Tujuan Pembangunan Berkelanjutan (SDGs).
-          Mari bersama-sama menumbuhkan masa depan yang berkelanjutan, demi
-          segalanya yang indah di dunia ini.
-        </p>
+      <section className="mt-32 text-sm text-gray-800 text-justify space-y-8 max-w-screen-xl mx-auto leading-6 mb-5 px-2.5 md:px-4 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4 bg-gray-50 rounded-lg p-4 md:p-8 shadow-md">
+          <p>
+            Indonesia, dikenal juga sebagai &quot;Zamrud Khatulistiwa,&quot;
+            memiliki potensi agrikultur yang luar biasa. Namun, sektor ini masih
+            dibelenggu oleh pelbagai masalah. Akibatnya, pekerja agrikultur
+            seperti petani, nelayan, dan peternak menerima belum merata
+            sejahtera dan Indonesia masih ketergantungan impor bahan pangan.
+            Padahal, di situasi global kedepannya, ketahanan pangan adalah kunci
+            untuk keutuhan bangsa dan negara.
+          </p>
+          <p>
+            Bersama PATANI, kita bisa menciptakan perubahan yang lebih besar
+            bagi seluruh pekerja sektor agrikultur di Indonesia. Kami percaya
+            bahwa dengan memberikan kesempatan bagi mereka untuk mengembangkan
+            bisnis dan inovasi, kita dapat memperkuat sektor ini sambil memupuk
+            kepercayaan masyarakat. Lebih dari itu, PATANI berkomitmen untuk
+            mewujudkan pertumbuhan ekonomi yang inklusif dan berkelanjutan,
+            sejalan dengan pencapaian Tujuan Pembangunan Berkelanjutan (SDGs).
+            Mari bersama-sama menumbuhkan masa depan yang berkelanjutan, demi
+            segalanya yang indah di dunia ini.
+          </p>
+        </div>
         <h2 className="text-center text-base py-2">
           - <strong>Pesan dari Tim PATANI</strong> -
         </h2>
@@ -110,7 +112,7 @@ const AboutPage = () => {
       </section>
 
       {/* Contribute */}
-      <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2.5 md:px-4 lg:px-8 max-w-screen-xl mx-auto mb-24 py-16">
+      <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2.5 md:px-4 lg:px-8 max-w-screen-xl mx-auto py-16">
         <h1 className="col-span-1 md:col-span-2 lg:col-span-3 text-center text-xl font-bold mb-3">
           Dalam Mendukung Pencapaian Tujuan Pembangunan Berkelanjutan
         </h1>

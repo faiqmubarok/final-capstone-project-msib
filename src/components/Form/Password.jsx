@@ -2,13 +2,13 @@ import { useState } from "react";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
 import propTypes from "prop-types";
-const Password = ({ password, setPassword, content }) => {
+const Password = ({ id, password, setPassword, content }) => {
   const [hidePassword, setHidePassword] = useState(true);
 
   return (
     <div>
       <label
-        htmlFor="password"
+        htmlFor={id ? id : "password"}
         className="block mb-2 text-sm font-medium text-gray-900 "
       >
         {content}
@@ -16,8 +16,8 @@ const Password = ({ password, setPassword, content }) => {
       <div className="relative">
         <input
           type={hidePassword ? "password" : "text"}
-          name="password"
-          id="password"
+          name={id ? id : "password"}
+          id={id ? id : "password"}
           placeholder="••••••••"
           className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 "
           required
@@ -40,6 +40,7 @@ Password.propTypes = {
   password: propTypes.string.isRequired,
   setPassword: propTypes.func.isRequired,
   content: propTypes.string,
+  id: propTypes.string,
 };
 
 export default Password;

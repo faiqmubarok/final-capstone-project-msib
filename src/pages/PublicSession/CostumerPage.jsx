@@ -173,16 +173,23 @@ const CostumerPage = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-greenPrimary text-white py-16 text-center">
-        <h2 className="text-4xl font-bold mb-6">
-          Ingin Mengembangkan Usaha Anda?
-        </h2>
-        <p className="text-lg mb-8">
-          Daftarkan diri Anda sekarang dan ajukan pinjaman untuk usaha Anda.
-        </p>
-        <button className="bg-orangePrimary text-white font-semibold py-3 px-8 rounded-full hover:bg-orangeSecondary transition duration-300">
-          Ajukan Pinjaman Sekarang
-        </button>
+      <section className="bg-gradient-to-r from-orangeSecondary to-greenPrimary text-white py-20 text-center relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-pattern opacity-10"></div>
+        <div className="relative z-10">
+          <h2 className="text-4xl font-bold mb-6">
+            Ingin Mengembangkan Usaha Anda?
+          </h2>
+          <p className=" mb-8">
+            Daftarkan diri Anda sekarang dan ajukan pinjaman untuk usaha Anda.
+          </p>
+          <button className="bg-orangePrimary text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-orange-500 hover:scale-105 transition-transform duration-300">
+            Ajukan Pinjaman Sekarang
+          </button>
+        </div>
+        {/* Decorative Element */}
+        <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-10 rounded-full w-80 h-80"></div>
+        <div className="absolute bottom-0 left-0 transform -translate-x-1/2 translate-y-1/2 bg-white bg-opacity-10 rounded-full w-80 h-80"></div>
       </section>
     </>
   );

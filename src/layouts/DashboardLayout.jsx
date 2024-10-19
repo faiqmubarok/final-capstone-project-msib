@@ -23,7 +23,7 @@ const DashboardLayout = ({ children }) => {
     {
       name: "Proyek",
       icon: <GoProjectRoadmap className="w-5 h-5" />,
-      link: "/project",
+      link: "/projects",
     },
     {
       name: "Portofolio",

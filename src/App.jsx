@@ -8,22 +8,23 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import AdminLayout from "./layouts/AdminLayout";
 
 // Public Pages
-import HomePage from "./pages/public/HomePage";
-import CostumerPage from "./pages/public/CostumerPage";
-import AboutPage from "./pages/public/AboutPage";
-import HelpPage from "./pages/public/HelpPage";
+import HomePage from "./pages/PublicSession/HomePage";
+import CostumerPage from "./pages/PublicSession/CostumerPage";
+import AboutPage from "./pages/PublicSession/AboutPage";
+import HelpPage from "./pages/PublicSession/HelpPage";
 
-// Auth
-import LoginPage from "./pages/auth/LoginPage";
-import RegisterPage from "./pages/auth/RegisterPage";
+// Authentication
+import LoginPage from "./pages/Authentication/LoginPage";
+import RegisterPage from "./pages/Authentication/RegisterPage";
 
 // Investor Pages
-import DashboardPage from "./pages/investor/DashboardPage";
-import ProjectPage from "./pages/investor/ProjectPage";
-import Transaction from "./pages/investor/Transaction";
+import DashboardPage from "./pages/InvestorSession/DashboardPage";
+import ProjectPage from "./pages/InvestorSession/ProjectPage";
+import Transaction from "./pages/InvestorSession/Transaction";
+import DetailProject from "./pages/InvestorSession/DetailProject";
 
 // Admin Pages
-import DashboardAdmin from "./pages/admin/DashboardAdmin";
+import DashboardAdmin from "./pages/AdminSession/DashboardAdmin";
 
 // const isAuthenticated = () => {
 //   return !!sessionStorage.getItem("authToken");
@@ -40,7 +41,7 @@ const App = () => {
 
   return (
     <Routes>
-      {/* Halaman Public */}
+      {/* Public Session */}
       <Route
         path="/"
         element={
@@ -86,27 +87,7 @@ const App = () => {
         }
       />
 
-      {/* Halaman Login */}
-      <Route
-        path="/login"
-        element={
-          <>
-            <PageTitle title={"Masuk | Patani"} />
-            <LoginPage />
-          </>
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <>
-            <PageTitle title={"Daftar | Patani"} />
-            <RegisterPage />
-          </>
-        }
-      />
-
-      {/* Halaman Dashboard */}
+      {/* Dashboard Investor Session */}
       <Route
         path="/dashboard"
         element={
@@ -121,12 +102,24 @@ const App = () => {
         }
       />
       <Route
-        path="/project"
+        path="/projects"
         element={
           userIsLoggedIn ? (
             <DashboardLayout>
               <PageTitle title={"Proyek | Patani"} />
               <ProjectPage />
+            </DashboardLayout>
+          ) : (
+            <LoginPage />
+          )
+        }
+      />
+      <Route
+        path="/project/:id"
+        element={
+          userIsLoggedIn ? (
+            <DashboardLayout>
+              <DetailProject />
             </DashboardLayout>
           ) : (
             <LoginPage />
@@ -146,21 +139,40 @@ const App = () => {
           )
         }
       />
-      
-      {/* Halaman Admin */}
-      <Route 
-      path="/dashboard-admin"
-      element={
-        adminIsLoggedIn ? (
-          <AdminLayout>
-            <PageTitle title={"Admin | Patani"} />
-            <DashboardAdmin />
-          </AdminLayout>
-        ) : (
-          <LoginPage />
-        )
-      }
 
+      {/* Admin Session */}
+      <Route
+        path="/dashboard-admin"
+        element={
+          adminIsLoggedIn ? (
+            <AdminLayout>
+              <PageTitle title={"Admin | Patani"} />
+              <DashboardAdmin />
+            </AdminLayout>
+          ) : (
+            <LoginPage />
+          )
+        }
+      />
+
+      {/* Authentication */}
+      <Route
+        path="/login"
+        element={
+          <>
+            <PageTitle title={"Masuk | Patani"} />
+            <LoginPage />
+          </>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <>
+            <PageTitle title={"Daftar | Patani"} />
+            <RegisterPage />
+          </>
+        }
       />
     </Routes>
   );

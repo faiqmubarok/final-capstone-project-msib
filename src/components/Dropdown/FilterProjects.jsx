@@ -32,7 +32,7 @@ const FilterProjects = ({ selectedFilter, setSelectedFilter }) => {
           <IoIosArrowDown className="w-4 h-4" />
         </button>
         {isOpen && (
-          <div className="absolute z-10 mt-2 w-full md:w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 right-0">
+          <div className="absolute z-10 mt-2 w-full md:w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 left-0">
             <div className="py-1" role="none">
               {options.map((option) => (
                 <button

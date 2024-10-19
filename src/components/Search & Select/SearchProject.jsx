@@ -67,7 +67,7 @@ const SearchProject = ({ onSearch }) => {
               {searchResult.length > 0 ? (
                 searchResult.map((project, index) => (
                   <Link
-                    to={`/projects/${project.name}`}
+                    to={`/project/${project.id}`}
                     key={index}
                     className="w-full flex justify-between items-center p-2 border-b last:border-b-0 hover:bg-gray-50 transition-colors duration-200"
                   >

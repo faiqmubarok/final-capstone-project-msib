@@ -7,13 +7,15 @@ export default {
   theme: {
     extend: {
       fontFamily:{
-        'poppins' : ['Poppins', 'sans-serif']
+        'poppins' : ['Poppins', 'sans-serif'],
+        'inter' : ['Inter', 'sans-serif']
       },
       colors: {
         'orangePrimary' : '#e26b13',
         'orangeSecondary' : '#b9580e',
         'greenPrimary' : '#16423C',
         'greenSecondary' : '#1a4b45',
+        'black': '#1C2434',
       }
     },
   },

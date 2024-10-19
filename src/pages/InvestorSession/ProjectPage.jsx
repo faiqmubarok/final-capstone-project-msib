@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import Pagination from "../../components/Pagination/Pagination";
 import TableContainer from "../../components/Table/TableContainer";
-import SearchProject from "../../components/Search/SearchProject";
+import SearchProject from "../../components/Search & Select/SearchProject";
 import FilterProjects from "../../components/Dropdown/FilterProjects";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 import dummyProjects from "../../data/dummy-projects.json";
 
@@ -63,6 +64,8 @@ const ProjectPage = () => {
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
 
   return (
+    <>
+    <Breadcrumbs pageName="Proyek" mainRoute={"/dashboard"} />
     <div className="bg-white shadow-md sm:rounded-lg flex flex-col gap-6 p-4">
       <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
         <div className="w-full md:w-1/2">
@@ -77,18 +80,18 @@ const ProjectPage = () => {
             onClick={handleReset}
             className="w-1/2 md:w-fit rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 gap-2"
           >
-            Reset
+            Atur Ulang
           </button>
         </div>
       </div>
       <hr className="border-gray-200" />
       {searchKey !== "" && (
         <p className="text-sm text-gray-700">
-          Menemukan proyek dengan kata kunci &quot;{searchKey}&quot;
+          Menampilkan proyek dengan kata kunci &quot;{searchKey}&quot;
         </p>
       )}
       <TableContainer
-        columns={["Nama Proyek", "Tipe", "Lokasi", "Keuntungan"]}
+        columns={["Nama Proyek", "Tipe", "Lokasi", "Dana Kelola", "Keuntungan"]}
         items={currentProjects}
       />
       <Pagination
@@ -97,6 +100,7 @@ const ProjectPage = () => {
         setPage={setCurrentPage}
       />
     </div>
+    </>
   );
 };
 

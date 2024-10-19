@@ -1,125 +1,164 @@
 {
-    "data": [
-      {
-        "name": "Pertanian Sinar Jaya",
-        "type": "Pertanian",
-        "location": "Jawa Barat",
-        "profit": "5,7%"
-      },
-      {
-        "name": "Perikanan Bahari",
-        "type": "Perikanan",
-        "location": "Jawa Timur",
-        "profit": "6,2%"
-      },
-      {
-        "name": "Teknologi Masa Depan",
-        "type": "Perikanan",
-        "location": "Jakarta",
-        "profit": "12%"
-      },
-      {
-        "name": "Agro Industri",
-        "type": "Pertanian",
-        "location": "Bali",
-        "profit": "7%"
-      },
-      {
-        "name": "Properti Maju",
-        "type": "Pertanian",
-        "location": "Jawa Tengah",
-        "profit": "10%"
-      },
-      {
-        "name": "Tambang Nusantara",
-        "type": "Peternakan",
-        "location": "Kalimantan",
-        "profit": "8,5%"
-      },
-      {
-        "name": "Pertanian Mandiri",
-        "type": "Pertanian",
-        "location": "Sumatra Barat",
-        "profit": "6%"
-      },
-      {
-        "name": "Perikanan Laut Jaya",
-        "type": "Perikanan",
-        "location": "Sulawesi Selatan",
-        "profit": "7,5%"
-      },
-      {
-        "name": "Peternakan Sejahtera",
-        "type": "Peternakan",
-        "location": "Papua",
-        "profit": "9%"
-      },
-      {
-        "name": "Pertanian Hijau",
-        "type": "Pertanian",
-        "location": "Aceh",
-        "profit": "4,5%"
-      },
-      {
-        "name": "Perikanan Samudera",
-        "type": "Perikanan",
-        "location": "Banten",
-        "profit": "5,8%"
-      },
-      {
-        "name": "Peternakan Makmur",
-        "type": "Peternakan",
-        "location": "Lampung",
-        "profit": "7,3%"
-      },
-      {
-        "name": "Pertanian Bersama",
-        "type": "Pertanian",
-        "location": "Yogyakarta",
-        "profit": "8%"
-      },
-      {
-        "name": "Perikanan Nusantara",
-        "type": "Perikanan",
-        "location": "Kalimantan Barat",
-        "profit": "6,5%"
-      },
-      {
-        "name": "Peternakan Rakyat",
-        "type": "Peternakan",
-        "location": "NTT",
-        "profit": "8,8%"
-      },
-      {
-        "name": "Pertanian Subur",
-        "type": "Pertanian",
-        "location": "Jambi",
-        "profit": "9%"
-      },
-      {
-        "name": "Perikanan Mega",
-        "type": "Perikanan",
-        "location": "Maluku",
-        "profit": "7%"
-      },
-      {
-        "name": "Peternakan Nusantara",
-        "type": "Peternakan",
-        "location": "Bengkulu",
-        "profit": "10%"
-      },
-      {
-        "name": "Pertanian Emas",
-        "type": "Pertanian",
-        "location": "Sumatra Utara",
-        "profit": "6,8%"
-      },
-      {
-        "name": "Perikanan Bahari Sejahtera",
-        "type": "Perikanan",
-        "location": "Bali",
-        "profit": "8%"
-      }
-    ]
-  }
-  
+  "data": [
+    {
+      "id": 1,
+      "name": "Pertanian Sinar Jaya",
+      "type": "Pertanian",
+      "location": "Jawa Barat",
+      "profit": "5,7%",
+      "dana": "Rp 1.500.000.000"
+    },
+    {
+      "id": 2,
+      "name": "Perikanan Bahari",
+      "type": "Perikanan",
+      "location": "Jawa Timur",
+      "profit": "6,2%",
+      "dana": "Rp 2.300.000.000"
+    },
+    {
+      "id": 3,
+      "name": "Teknologi Masa Depan",
+      "type": "Perikanan",
+      "location": "Jakarta",
+      "profit": "12%",
+      "dana": "Rp 3.000.000.000"
+    },
+    {
+      "id": 4,
+      "name": "Agro Industri",
+      "type": "Pertanian",
+      "location": "Bali",
+      "profit": "7%",
+      "dana": "Rp 1.800.000.000"
+    },
+    {
+      "id": 5,
+      "name": "Properti Maju",
+      "type": "Pertanian",
+      "location": "Jawa Tengah",
+      "profit": "10%",
+      "dana": "Rp 2.100.000.000"
+    },
+    {
+      "id": 6,
+      "name": "Tambang Nusantara",
+      "type": "Peternakan",
+      "location": "Kalimantan",
+      "profit": "8,5%",
+      "dana": "Rp 4.200.000.000"
+    },
+    {
+      "id": 7,
+      "name": "Pertanian Mandiri",
+      "type": "Pertanian",
+      "location": "Sumatra Barat",
+      "profit": "6%",
+      "dana": "Rp 1.700.000.000"
+    },
+    {
+      "id": 8,
+      "name": "Perikanan Laut Jaya",
+      "type": "Perikanan",
+      "location": "Sulawesi Selatan",
+      "profit": "7,5%",
+      "dana": "Rp 2.500.000.000"
+    },
+    {
+      "id": 9,
+      "name": "Peternakan Sejahtera",
+      "type": "Peternakan",
+      "location": "Papua",
+      "profit": "9%",
+      "dana": "Rp 3.500.000.000"
+    },
+    {
+      "id": 10,
+      "name": "Pertanian Hijau",
+      "type": "Pertanian",
+      "location": "Aceh",
+      "profit": "4,5%",
+      "dana": "Rp 1.200.000.000"
+    },
+    {
+      "id": 11,
+      "name": "Perikanan Samudera",
+      "type": "Perikanan",
+      "location": "Banten",
+      "profit": "5,8%",
+      "dana": "Rp 1.800.000.000"
+    },
+    {
+      "id": 12,
+      "name": "Peternakan Makmur",
+      "type": "Peternakan",
+      "location": "Lampung",
+      "profit": "7,3%",
+      "dana": "Rp 2.200.000.000"
+    },
+    {
+      "id": 13,
+      "name": "Pertanian Bersama",
+      "type": "Pertanian",
+      "location": "Yogyakarta",
+      "profit": "8%",
+      "dana": "Rp 1.900.000.000"
+    },
+    {
+      "id": 14,
+      "name": "Perikanan Nusantara",
+      "type": "Perikanan",
+      "location": "Kalimantan Barat",
+      "profit": "6,5%",
+      "dana": "Rp 2.000.000.000"
+    },
+    {
+      "id": 15,
+      "name": "Peternakan Rakyat",
+      "type": "Peternakan",
+      "location": "NTT",
+      "profit": "8,8%",
+      "dana": "Rp 3.800.000.000"
+    },
+    {
+      "id": 16,
+      "name": "Pertanian Subur",
+      "type": "Pertanian",
+      "location": "Jambi",
+      "profit": "9%",
+      "dana": "Rp 1.600.000.000"
+    },
+    {
+      "id": 17,
+      "name": "Perikanan Mega",
+      "type": "Perikanan",
+      "location": "Maluku",
+      "profit": "7%",
+      "dana": "Rp 2.400.000.000"
+    },
+    {
+      "id": 18,
+      "name": "Peternakan Nusantara",
+      "type": "Peternakan",
+      "location": "Bengkulu",
+      "profit": "10%",
+      "dana": "Rp 3.700.000.000"
+    },
+    {
+      "id": 19,
+      "name": "Pertanian Emas",
+      "type": "Pertanian",
+      "location": "Sumatra Utara",
+      "profit": "6,8%",
+      "dana": "Rp 1.900.000.000"
+    },
+    {
+      "id": 20,
+      "name": "Perikanan Bahari Sejahtera",
+      "type": "Perikanan",
+      "location": "Bali",
+      "profit": "8%",
+      "dana": "Rp 2.300.000.000"
+    }
+  ]
+}

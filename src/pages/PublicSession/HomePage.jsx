@@ -23,7 +23,7 @@ const HomePage = () => {
         }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 bg-[#000] opacity-50"></div>
         <article className="relative text-center text-white z-10 max-w-2xl px-4">
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
             Berikan Dampak Positif dengan Investasi Anda
@@ -216,17 +216,20 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-pattern opacity-10"></div>
 
         <div className="relative z-10">
-          <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
+          <h2 className="text-4xl font-bold mb-6">
             Mulai Investasi Anda Sekarang
           </h2>
-          <p className=" text-base md:text-lg mb-8 max-w-2xl mx-auto">
+          <p className=" text-base mb-8 max-w-2xl mx-auto">
             Berinvestasi di sektor pertanian, peternakan, dan perikanan untuk
             masa depan yang lebih baik. Dapatkan keuntungan dan dukung
             kesejahteraan masyarakat.
           </p>
-          <button className="bg-orangePrimary text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-orange-500 hover:scale-105 transition-transform duration-300">
+          <Link
+            to={"/register"}
+            className="bg-orangePrimary text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-orange-500 hover:scale-105 transition-transform duration-300"
+          >
             Daftar Sekarang
-          </button>
+          </Link>
         </div>
 
         {/* Decorative Element */}
