@@ -40,16 +40,17 @@ const DropdownUser = () => {
               <li>
                 <Link
                   to="/profile"
+                  onClick={() => setDropdownOpen(false)}
                   className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-orangePrimary lg:text-base"
                 >
                   <IoPersonOutline className="w-5 h-5" />
-                  My Profile
+                  Profil Saya
                 </Link>
               </li>
             </ul>
             <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-orangePrimary lg:text-base">
               <SlLogout className="w-5 h-5" />
-              Log Out
+              Keluar
             </button>
           </div>
         )}

@@ -6,7 +6,7 @@ const Input = ({ value, setValue, type, id, label, placeholder, autoComplete, na
   };
 
   return (
-    <div>
+    <div className="w-full">
       <label
         htmlFor={id}
         className="block mb-2 text-sm font-medium text-gray-500"
@@ -17,7 +17,7 @@ const Input = ({ value, setValue, type, id, label, placeholder, autoComplete, na
         type={type}
         name={name} 
         id={id}
-        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-greenPrimary focus:border-greenPrimary block w-full p-2.5"
+        className="bg-gray-50 border border-gray-300 text-black rounded-lg focus:ring-greenPrimary focus:border-greenPrimary block w-full p-2.5"
         placeholder={placeholder}
         required
         value={value}

@@ -22,6 +22,8 @@ import DashboardPage from "./pages/InvestorSession/DashboardPage";
 import ProjectPage from "./pages/InvestorSession/ProjectPage";
 import Transaction from "./pages/InvestorSession/Transaction";
 import DetailProject from "./pages/InvestorSession/DetailProject";
+import Profile from "./pages/InvestorSession/Profile";
+import Portfolio from "./pages/InvestorSession/Portfolio";
 
 // Admin Pages
 import DashboardAdmin from "./pages/AdminSession/DashboardAdmin";
@@ -133,6 +135,32 @@ const App = () => {
             <DashboardLayout>
               <PageTitle title={"Transaksi | Patani"} />
               <Transaction />
+            </DashboardLayout>
+          ) : (
+            <LoginPage />
+          )
+        }
+      />
+      <Route
+        path="/portfolio"
+        element={
+          userIsLoggedIn ? (
+            <DashboardLayout>
+              <PageTitle title={"Portfolio | Patani"} />
+              <Portfolio />
+            </DashboardLayout>
+          ) : (
+            <LoginPage />
+          )
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          userIsLoggedIn ? (
+            <DashboardLayout>
+              <PageTitle title={"Profile | Patani"} />
+              <Profile />
             </DashboardLayout>
           ) : (
             <LoginPage />
