@@ -1,17 +1,34 @@
 import PageTitle from "../../components/PageTitle";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import data from "../../data/dummy-projects.json";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import images from "../../images/images";
 import { IoMdTime } from "react-icons/io";
 import { FaRegBuilding } from "react-icons/fa";
+import Modal from "../../components/Modal/Modal";
 
 const DetailProject = () => {
   const { id } = useParams();
   const [project, setProject] = useState(null);
-  const [investment, setInvestment] = useState(1000000); // Default investasi Rp 1 juta
+  const [investment, setInvestment] = useState(1000000);
   const [simulatedReturns, setSimulatedReturns] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Menggunakan useCallback untuk mencegah fungsi berubah di antara render
+  const calculateSimulation = useCallback(
+    (profitPercentage) => {
+      const profitDecimal = parseFloat(profitPercentage) / 100;
+      const returns = {
+        "6 bulan": investment + investment * profitDecimal * 0.5,
+        "1 tahun": investment + investment * profitDecimal,
+        "3 tahun": investment + investment * profitDecimal * 3,
+        "5 tahun": investment + investment * profitDecimal * 5,
+      };
+      setSimulatedReturns(returns);
+    },
+    [investment]
+  );
 
   useEffect(() => {
     const fetchProject = data.data.find(
@@ -19,20 +36,9 @@ const DetailProject = () => {
     );
     if (fetchProject) {
       setProject(fetchProject);
-      calculateSimulation(fetchProject.profit); // Hitung simulasi langsung dengan nilai default
+      calculateSimulation(fetchProject.profit);
     }
-  }, [id]);
-
-  const calculateSimulation = (profitPercentage) => {
-    const profitDecimal = parseFloat(profitPercentage) / 100;
-    const returns = {
-      "6 bulan": investment + investment * profitDecimal * 0.5,
-      "1 tahun": investment + investment * profitDecimal,
-      "3 tahun": investment + investment * profitDecimal * 3,
-      "5 tahun": investment + investment * profitDecimal * 5,
-    };
-    setSimulatedReturns(returns);
-  };
+  }, [id, calculateSimulation]);
 
   const handleInvestmentChange = (e) => {
     setInvestment(parseInt(e.target.value));
@@ -66,7 +72,10 @@ const DetailProject = () => {
             <FaRegBuilding className="w-6 h-6 mr-2 rounded-full" />
             <h2 className="text-2xl font-bold text-gray-800">{project.name}</h2>
           </span>
-          <button className="bg-orangePrimary hover:bg-orangeSecondary text-white font-bold py-2 px-4 rounded-lg w-full md:w-fit shadow-lg border-2 border-orangeSecondary hover:border-orangePrimary">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-orangePrimary hover:bg-orangeSecondary text-white font-bold py-2 px-4 rounded-lg w-full md:w-fit shadow-lg border-2 border-orangeSecondary hover:border-orangePrimary"
+          >
             <span className="flex items-center justify-center">
               <IoMdTime className="w-5 h-5 mr-2" />
               Investasi Sekarang
@@ -79,7 +88,7 @@ const DetailProject = () => {
         <section className="col-span-5 xl:col-span-3">
           {/* Tentang Proyek */}
           <div className="bg-white shadow-md rounded-sm border border-gray-100 mb-8">
-            <div className="border-b border-gray-100 py-4 px-6">
+            <div className="border-b border-gray-200 py-4 px-6">
               <h3 className="text-base font-semibold text-gray-800">
                 Tentang Proyek
               </h3>
@@ -95,7 +104,7 @@ const DetailProject = () => {
           </div>
           {/* Detail Proyek */}
           <div className="bg-white shadow-md rounded-sm border border-gray-100 mb-8">
-            <div className="border-b border-gray-100 py-4 px-6">
+            <div className="border-b border-gray-200 py-4 px-6">
               <h3 className="text-base font-semibold text-gray-800">
                 Detail Proyek
               </h3>
@@ -126,7 +135,7 @@ const DetailProject = () => {
             </ul>
           </div>
           {/* Laporan Keuangan */}
-          <div className="bg-white shadow-md rounded-sm border border-gray-100">
+          <div className="bg-white shadow-md rounded-sm border border-gray-200">
             <div className="border-b border-gray-100 py-4 px-6">
               <h3 className="text-base font-semibold text-gray-800">
                 Laporan Keuangan
@@ -176,7 +185,7 @@ const DetailProject = () => {
 
         <section className="col-span-5 xl:col-span-2">
           <div className="bg-white shadow-md rounded-sm border border-gray-100">
-            <div className="border-b border-gray-100 py-4 px-6">
+            <div className="border-b border-gray-200 py-4 px-6">
               <h3 className="text-base font-semibold text-gray-800">
                 Simulasi Investasi
               </h3>
@@ -210,6 +219,52 @@ const DetailProject = () => {
           </div>
         </section>
       </div>
+
+      {isModalOpen && (
+        <Modal onClose={() => setIsModalOpen(false)}>
+          <Modal.Header
+            title="Top-Up Saldo"
+            onClose={() => setIsModalOpen(false)}
+          />
+          <div className="p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Masukkan Jumlah Top-Up</h2>
+            <input
+              type="number"
+              placeholder="Contoh: 500000"
+              className="w-full p-2 border rounded-md"
+            />
+
+            <h2 className="text-lg font-semibold mt-4">
+              Pilih Metode Pembayaran
+            </h2>
+            <div className="space-y-2">
+              <label className="flex items-center space-x-3">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="bank_transfer"
+                />
+                <span>Bank Transfer</span>
+              </label>
+              <label className="flex items-center space-x-3">
+                <input type="radio" name="paymentMethod" value="e_wallet" />
+                <span>E-Wallet (Gopay, OVO, dll.)</span>
+              </label>
+              <label className="flex items-center space-x-3">
+                <input type="radio" name="paymentMethod" value="credit_card" />
+                <span>Kartu Kredit</span>
+              </label>
+            </div>
+
+            <button
+              className="w-full bg-green-500 text-white font-semibold py-2 rounded-md mt-4 hover:bg-green-600 transition-colors"
+
+            >
+              Konfirmasi Top-Up
+            </button>
+          </div>
+        </Modal>
+      )}
     </>
   );
 };

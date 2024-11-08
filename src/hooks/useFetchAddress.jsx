@@ -13,7 +13,7 @@ const useFetchAddress = ({ endPoint, from, id }) => {
         setLoading(true);
         setError(null);
         const response = await axios.get(
-          `https://alamat.thecloudalert.com/api/${endPoint}/get/${
+          `${import.meta.env.VITE_BASE_URL_ADDRESS}/${endPoint}/get/${
             from && id ? `?d_${from}_id=${id}` : ""
           }`
         );

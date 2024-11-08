@@ -20,16 +20,13 @@ const useFetchBankList = () => {
       setError(null);
 
       try {
-        const apiKey = "xnd_development_P4qDfOss0OCpl8RtKrROHjaQYNCk9dN5lSfk+R1l9Wbe+rSiCwZ3jw==";
-        const password = "";
-
         // Format untuk Basic Auth
-        const authString = `${apiKey}:${password}`;
+        const authString = `${import.meta.env.VITE_XENDIT_API_KEY}:${import.meta.env.VITE_XENDIT_PASSWORD}`;
         // Encode ke Base64
         const encodedCredentials = btoa(authString);
 
         const response = await axios.get(
-          "https://api.xendit.co/available_disbursements_banks",
+        `${import.meta.env.VITE_XENDIT_BANKS_URL}`,
           {
             headers: {
               Authorization: `Basic ${encodedCredentials}`,

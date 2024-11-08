@@ -13,14 +13,16 @@ const RegisterPage = () => {
     confirmPassword: "",
     phone: "",
     noKtp: "",
-    noRekening: "",
-    bank: null,
+    finance: {
+      bank: "",
+      noRekening: "",
+    },
     address: {
-      province: null,
-      city: null,
-      district: null,
-      subDistrict: null,
-      postalCode: null,
+      province: "",
+      city: "",
+      district: "",
+      subDistrict: "",
+      postalCode: "",
     },
   });
 

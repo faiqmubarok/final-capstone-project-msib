@@ -11,24 +11,24 @@ const FormAddress = ({ formData, setFormData, formatOptions }) => {
   const { data: city } = useFetchAddress({
     endPoint: "kabkota",
     from: "provinsi",
-    id: formData.address.province?.id,
+    id: formData.address?.province,
   });
 
   const { data: district } = useFetchAddress({
     endPoint: "kecamatan",
     from: "kabkota",
-    id: formData.address.city?.id,
+    id: formData.address?.city,
   });
 
   const { data: subDistrict } = useFetchAddress({
     endPoint: "kelurahan",
     from: "kecamatan",
-    id: formData.address.district?.id,
+    id: formData.address?.district,
   });
 
   const { data: postalCode } = useFetchPortalCode({
-    cityId: formData.address.city?.id,
-    districtId: formData.address.district?.id,
+    cityId: formData.address?.city,
+    districtId: formData.address?.district,
   });
 
   const handleAddressChange = (name, value) => {

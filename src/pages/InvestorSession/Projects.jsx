@@ -66,7 +66,7 @@ const ProjectPage = () => {
   return (
     <>
     <Breadcrumbs pageName="Proyek" mainRoute={"/dashboard"} />
-    <div className="bg-white shadow-md sm:rounded-lg flex flex-col gap-6 p-4">
+    <div className="bg-white shadow-md rounded-sm border border-gray-100 flex flex-col gap-6 p-4">
       <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
         <div className="w-full md:w-1/2">
           <SearchProject onSearch={handleSearchResult} />

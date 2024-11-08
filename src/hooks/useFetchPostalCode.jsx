@@ -13,7 +13,7 @@ const useFetchPortalCode = ({ cityId, districtId }) => {
         setLoading(true);
         setError(null);
         const response = await axios.get(
-          `https://alamat.thecloudalert.com/api/kodepos/get/?d_kabkota_id=${cityId}&d_kecamatan_id=${districtId}`
+          `${import.meta.env.VITE_BASE_URL_ADDRESS}${import.meta.env.VITE_KODEPOS_ENDPOINT}/?d_kabkota_id=${cityId}&d_kecamatan_id=${districtId}`
         );
 
         setData(response?.data.result);

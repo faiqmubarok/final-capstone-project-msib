@@ -3,22 +3,22 @@ import Select from "react-select";
 
 const SelectOption = ({
   option,
-  selectedItem,
-  setSelectedItem,
   id,
   placeholder,
   content,
+  selectedItem,
+  setSelectedItem,
 }) => {
   const selectedValue = selectedItem
-    ? { value: selectedItem.id, label: selectedItem.name }
+    ? {
+        value: selectedItem,
+        label:
+          option && option.find((opt) => opt.value === selectedItem)?.label,
+      }
     : null;
 
   const handleChange = (selectedOption) => {
-    const selectedData = {
-      id: selectedOption.value,
-      name: selectedOption.label,
-    };
-    setSelectedItem(selectedData);
+    setSelectedItem(selectedOption.value);
   };
 
   return (
@@ -47,7 +47,7 @@ const SelectOption = ({
 
 SelectOption.propTypes = {
   option: propTypes.array,
-  selectedItem: propTypes.object,
+  selectedItem: propTypes.string,
   setSelectedItem: propTypes.func,
   id: propTypes.string,
   placeholder: propTypes.string,
@@ -63,6 +63,7 @@ const customStyles = {
     borderRadius: "0.5rem", // Tailwind rounded-lg
     padding: "0.2rem", // Tailwind p-2.5
     boxShadow: "none",
+    cursor: "dissabled",
     "&:focus": {
       borderColor: "#10b981", // Tailwind focus:border-greenPrimary
       outline: "none",

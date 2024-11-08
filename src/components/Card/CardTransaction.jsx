@@ -1,14 +1,15 @@
 import propTypes from "prop-types";
 import { FaRegBuilding } from "react-icons/fa";
+import { useTransaction } from "../../context/TransactionContext";
 const CardTransaction = ({
   transaction,
   selectedTransaction,
-  onSelectedTransaction,
 }) => {
+  const { handleSelectTransaction } = useTransaction();
   return (
     <div
       key={transaction.id}
-      onClick={() => onSelectedTransaction(transaction)}
+      onClick={() => handleSelectTransaction(transaction)}
       className={`p-4 border border-gray-100 rounded shadow-sm cursor-pointer hover:bg-gray-50 transition flex items-center text-sm ${
         selectedTransaction === transaction ? "border-orangePrimary" : ""
       }`}

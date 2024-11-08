@@ -1,36 +1,19 @@
 {
   "address": {
-    "province": {
-      "id": "9",
-      "name": "Jawa Barat"
-    },
-    "city": {
-      "id": "79",
-      "name": "Kabupaten Karawang"
-    },
-    "district": {
-      "id": "1085",
-      "name": "Karawang Barat"
-    },
-    "subDistrict": {
-      "id": "12712",
-      "name": "Karangpawitan"
-    },
-    "postalCode": {
-      "id": "9312",
-      "name": "41315"
-    }
+    "city": "79",
+    "district": "1085",
+    "postalCode": "9312",
+    "province": "9",
+    "subDistrict": "12712"
   },
-  "bank": {
-    "id": "MANDIRI",
-    "name": "Bank Mandiri"
-  },
-  "confirmPassword": "1234567890",
+  "confirmPassword": "faiq123",
   "email": "faiqmubarok@gmail.com",
+  "finance": {
+    "bank": "MANDIRI",
+    "noRekening": "1234567890"
+  },
   "name": "Muhammad Faiq Mubarok",
-  "noKtp": "1234567890",
-  "noRekening": "11234567890",
-  "password": "1234567890",
-  "phone": "+6282117748606",
-  "image": ""
+  "noKtp": "3215012011030001",
+  "password": "faiq123",
+  "phone": "+6282117748606"
 }

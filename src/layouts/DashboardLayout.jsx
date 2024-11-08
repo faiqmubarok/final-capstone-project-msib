@@ -1,5 +1,6 @@
 import propTypes from "prop-types";
 import { useState } from "react";
+import { useRef } from "react";
 import DashboardHeader from "../components/Header/DashboardHeader";
 import DashboardSidebar from "../components/Sidebar/DashboardSidebar";
 import ScrollToTop from "../components/ScrollToTop";
@@ -13,6 +14,9 @@ import { GoProjectRoadmap } from "react-icons/go";
 
 const DashboardLayout = ({ children }) => {
   const mainRoute = "/dashboard";
+  const scrollableRef = useRef(null);
+
+  
 
   const menu = [
     {
@@ -36,6 +40,7 @@ const DashboardLayout = ({ children }) => {
       link: "/transaction",
     },
   ];
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -49,7 +54,7 @@ const DashboardLayout = ({ children }) => {
           setSidebarOpen={setSidebarOpen}
         />
         {/* Sidebar */}
-        <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+        <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden" ref={scrollableRef}>
           {/* Header */}
           <DashboardHeader
             mainRoute={mainRoute}
@@ -63,7 +68,7 @@ const DashboardLayout = ({ children }) => {
               {children}
             </div>
           </main>
-          <ScrollToTop />
+          <ScrollToTop scrollableRef={scrollableRef} />
         </div>
       </div>
     </div>

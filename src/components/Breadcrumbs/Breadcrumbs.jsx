@@ -9,7 +9,7 @@ const Breadcrumbs = ({ mainRoute, pageName, pageLink }) => {
       </h2>
 
       <nav>
-        <ol className="flex items-center gap-2 text-gray-500 ">
+        <ol className="flex items-center gap-2 text-gray-500 flex-wrap">
           <li>
             <Link
               className="font-medium hover:text-orangePrimary"

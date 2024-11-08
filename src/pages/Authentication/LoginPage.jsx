@@ -4,8 +4,11 @@ import Input from "../../components/Form/Input";
 import Password from "../../components/Form/password";
 import Logo from "../../components/Logo";
 import ButtonBack from "../../components/ButtonBack";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const [formUserLogin, setUserLogin] = useState({
     email: "",
     password: "",
@@ -17,6 +20,18 @@ const LoginPage = () => {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try{
+      const mockAuthToken = "mockAuthToken12345";
+      sessionStorage.setItem("authToken", mockAuthToken);
+      navigate("/dashboard");
+    }catch(error){
+      console.log(error);
+    }
+
   };
 
   return (
@@ -31,7 +46,7 @@ const LoginPage = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-4 md:mb-6">
               Masuk ke akunmu
             </h1>
-            <form className="grid grid-cols-1 gap-4 md:gap-6">
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:gap-6">
               <Input
                 value={formUserLogin.email}
                 setValue={handleInputChange}

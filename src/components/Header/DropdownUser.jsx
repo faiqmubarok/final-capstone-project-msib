@@ -5,9 +5,17 @@ import images from "../../images/images";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoPersonOutline } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
+import { useNavigate } from "react-router-dom";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("authToken");
+    navigate("/");
+  }
+
   return (
     <ClickedOutside onClick={() => setDropdownOpen(false)} className="relative">
       <li>
@@ -48,7 +56,7 @@ const DropdownUser = () => {
                 </Link>
               </li>
             </ul>
-            <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-orangePrimary lg:text-base">
+            <button onClick={handleLogout} className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-orangePrimary lg:text-base">
               <SlLogout className="w-5 h-5" />
               Keluar
             </button>

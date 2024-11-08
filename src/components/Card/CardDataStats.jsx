@@ -14,15 +14,17 @@ const CardDataStats = ({
       <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gray-100">
         {children}
       </div>
-      <div className="mt-4 flex items-end justify-between">
+      <div className="mt-4">
+        <h4 className="text-xl font-bold text-black">{total}</h4>
+      </div>
+      <div className="flex items-end justify-between">
         <div>
-          <h4 className="text-xl font-bold text-black">{total}</h4>
           <span className="text-sm font-medium">{title}</span>
         </div>
 
         <span
           className={`flex items-center gap-1 text-sm font-medium ${
-            levelUp && "text-red-300"
+            levelUp && "text-green-500"
           } ${levelDown && "text-red-500"} `}
         >
           {rate}

@@ -52,7 +52,6 @@ const FormUserRegister = ({ formData, setFormData }) => {
         <div className="grid grid-cols-1 gap-4 md:gap-6 md:grid-cols-2">
           <FormFinance
             formData={formData}
-            handleInputChange={handleInputChange}
             setFormData={setFormData}
             formatOptions={formatOptions}
           />

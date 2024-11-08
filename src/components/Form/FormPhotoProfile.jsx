@@ -11,7 +11,11 @@ const FormPhotoProfile = ({ formData, setFormData }) => {
   // useEffect untuk menampilkan gambar yang sudah ada di formData.image
   useEffect(() => {
     if (formData.image) {
-      setImagePreview(typeof formData.image === "string" ? formData.image : URL.createObjectURL(formData.image));
+      setImagePreview(
+        typeof formData.image === "string"
+          ? formData.image
+          : URL.createObjectURL(formData.image)
+      );
       setIsInputDisabled(true); // Nonaktifkan input jika sudah ada gambar
     }
   }, [formData.image]);
@@ -40,7 +44,7 @@ const FormPhotoProfile = ({ formData, setFormData }) => {
   };
 
   return (
-    <div className="p-7">
+    <>
       <div className="mb-4 flex items-center gap-3">
         <div className="h-14 w-14 rounded-full overflow-hidden shadow-lg">
           {imagePreview ? (
@@ -106,7 +110,7 @@ const FormPhotoProfile = ({ formData, setFormData }) => {
       {uploadMessage && (
         <p className="text-sm mt-2 text-center text-black">{uploadMessage}</p>
       )}
-    </div>
+    </>
   );
 };
 

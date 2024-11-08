@@ -2,6 +2,9 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import PageTitle from "./components/PageTitle";
 
+// Context
+import AppProvider from "./context/AppProvider";
+
 // Layout
 import PublicLayout from "./layouts/PublicLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
@@ -18,8 +21,8 @@ import LoginPage from "./pages/Authentication/LoginPage";
 import RegisterPage from "./pages/Authentication/RegisterPage";
 
 // Investor Pages
-import DashboardPage from "./pages/InvestorSession/DashboardPage";
-import ProjectPage from "./pages/InvestorSession/ProjectPage";
+import Dashboard from "./pages/InvestorSession/Dashboard";
+import Projects from "./pages/InvestorSession/Projects";
 import Transaction from "./pages/InvestorSession/Transaction";
 import DetailProject from "./pages/InvestorSession/DetailProject";
 import Profile from "./pages/InvestorSession/Profile";
@@ -28,13 +31,13 @@ import Portfolio from "./pages/InvestorSession/Portfolio";
 // Admin Pages
 import DashboardAdmin from "./pages/AdminSession/DashboardAdmin";
 
-// const isAuthenticated = () => {
-//   return !!sessionStorage.getItem("authToken");
-// };
+const isAuthenticated = () => {
+  return !!sessionStorage.getItem("authToken");
+};
 
 const App = () => {
   const { pathname } = useLocation();
-  const userIsLoggedIn = true;
+  const userIsLoggedIn = isAuthenticated();
   const adminIsLoggedIn = true;
 
   useEffect(() => {
@@ -42,167 +45,169 @@ const App = () => {
   }, [pathname]);
 
   return (
-    <Routes>
-      {/* Public Session */}
-      <Route
-        path="/"
-        element={
-          <>
-            <PageTitle title={"Pemodal | Patani"} />
-            <PublicLayout>
-              <HomePage />
-            </PublicLayout>
-          </>
-        }
-      />
-      <Route
-        path="/costumer"
-        element={
-          <>
-            <PageTitle title={"Peminjam | Patani"} />
-            <PublicLayout>
-              <CostumerPage />
-            </PublicLayout>
-          </>
-        }
-      />
-      <Route
-        path="/about"
-        element={
-          <>
-            <PageTitle title={"Tentang Kami | Patani"} />
-            <PublicLayout>
-              <AboutPage />
-            </PublicLayout>
-          </>
-        }
-      />
-      <Route
-        path="/help"
-        element={
-          <>
-            <PageTitle title={"Bantuan | Patani"} />
-            <PublicLayout>
-              <HelpPage />
-            </PublicLayout>
-          </>
-        }
-      />
+    <AppProvider>
+      <Routes>
+        {/* Public Session */}
+        <Route
+          path="/"
+          element={
+            <>
+              <PageTitle title={"Pemodal | Patani"} />
+              <PublicLayout>
+                <HomePage />
+              </PublicLayout>
+            </>
+          }
+        />
+        <Route
+          path="/costumer"
+          element={
+            <>
+              <PageTitle title={"Peminjam | Patani"} />
+              <PublicLayout>
+                <CostumerPage />
+              </PublicLayout>
+            </>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <>
+              <PageTitle title={"Tentang Kami | Patani"} />
+              <PublicLayout>
+                <AboutPage />
+              </PublicLayout>
+            </>
+          }
+        />
+        <Route
+          path="/help"
+          element={
+            <>
+              <PageTitle title={"Bantuan | Patani"} />
+              <PublicLayout>
+                <HelpPage />
+              </PublicLayout>
+            </>
+          }
+        />
 
-      {/* Dashboard Investor Session */}
-      <Route
-        path="/dashboard"
-        element={
-          userIsLoggedIn ? (
-            <DashboardLayout>
-              <PageTitle title={"Dashboard | Patani"} />
-              <DashboardPage />
-            </DashboardLayout>
-          ) : (
-            <LoginPage />
-          )
-        }
-      />
-      <Route
-        path="/projects"
-        element={
-          userIsLoggedIn ? (
-            <DashboardLayout>
-              <PageTitle title={"Proyek | Patani"} />
-              <ProjectPage />
-            </DashboardLayout>
-          ) : (
-            <LoginPage />
-          )
-        }
-      />
-      <Route
-        path="/project/:id"
-        element={
-          userIsLoggedIn ? (
-            <DashboardLayout>
-              <DetailProject />
-            </DashboardLayout>
-          ) : (
-            <LoginPage />
-          )
-        }
-      />
-      <Route
-        path="/transaction"
-        element={
-          userIsLoggedIn ? (
-            <DashboardLayout>
-              <PageTitle title={"Transaksi | Patani"} />
-              <Transaction />
-            </DashboardLayout>
-          ) : (
-            <LoginPage />
-          )
-        }
-      />
-      <Route
-        path="/portfolio"
-        element={
-          userIsLoggedIn ? (
-            <DashboardLayout>
-              <PageTitle title={"Portfolio | Patani"} />
-              <Portfolio />
-            </DashboardLayout>
-          ) : (
-            <LoginPage />
-          )
-        }
-      />
-      <Route
-        path="/profile"
-        element={
-          userIsLoggedIn ? (
-            <DashboardLayout>
-              <PageTitle title={"Profile | Patani"} />
-              <Profile />
-            </DashboardLayout>
-          ) : (
-            <LoginPage />
-          )
-        }
-      />
+        {/* Dashboard Investor Session */}
+        <Route
+          path="/dashboard"
+          element={
+            userIsLoggedIn ? (
+              <DashboardLayout>
+                <PageTitle title={"Dashboard | Patani"} />
+                <Dashboard />
+              </DashboardLayout>
+            ) : (
+              <LoginPage />
+            )
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            userIsLoggedIn ? (
+              <DashboardLayout>
+                <PageTitle title={"Proyek | Patani"} />
+                <Projects />
+              </DashboardLayout>
+            ) : (
+              <LoginPage />
+            )
+          }
+        />
+        <Route
+          path="/project/:id"
+          element={
+            userIsLoggedIn ? (
+              <DashboardLayout>
+                <DetailProject />
+              </DashboardLayout>
+            ) : (
+              <LoginPage />
+            )
+          }
+        />
+        <Route
+          path="/transaction"
+          element={
+            userIsLoggedIn ? (
+              <DashboardLayout>
+                <PageTitle title={"Transaksi | Patani"} />
+                <Transaction />
+              </DashboardLayout>
+            ) : (
+              <LoginPage />
+            )
+          }
+        />
+        <Route
+          path="/portfolio"
+          element={
+            userIsLoggedIn ? (
+              <DashboardLayout>
+                <PageTitle title={"Portfolio | Patani"} />
+                <Portfolio />
+              </DashboardLayout>
+            ) : (
+              <LoginPage />
+            )
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            userIsLoggedIn ? (
+              <DashboardLayout>
+                <PageTitle title={"Profile | Patani"} />
+                <Profile />
+              </DashboardLayout>
+            ) : (
+              <LoginPage />
+            )
+          }
+        />
 
-      {/* Admin Session */}
-      <Route
-        path="/dashboard-admin"
-        element={
-          adminIsLoggedIn ? (
-            <AdminLayout>
-              <PageTitle title={"Admin | Patani"} />
-              <DashboardAdmin />
-            </AdminLayout>
-          ) : (
-            <LoginPage />
-          )
-        }
-      />
+        {/* Admin Session */}
+        <Route
+          path="/dashboard-admin"
+          element={
+            adminIsLoggedIn ? (
+              <AdminLayout>
+                <PageTitle title={"Admin | Patani"} />
+                <DashboardAdmin />
+              </AdminLayout>
+            ) : (
+              <LoginPage />
+            )
+          }
+        />
 
-      {/* Authentication */}
-      <Route
-        path="/login"
-        element={
-          <>
-            <PageTitle title={"Masuk | Patani"} />
-            <LoginPage />
-          </>
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <>
-            <PageTitle title={"Daftar | Patani"} />
-            <RegisterPage />
-          </>
-        }
-      />
-    </Routes>
+        {/* Authentication */}
+        <Route
+          path="/login"
+          element={
+            <>
+              <PageTitle title={"Masuk | Patani"} />
+              <LoginPage />
+            </>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <>
+              <PageTitle title={"Daftar | Patani"} />
+              <RegisterPage />
+            </>
+          }
+        />
+      </Routes>
+    </AppProvider>
   );
 };
 

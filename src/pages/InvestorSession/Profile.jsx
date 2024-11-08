@@ -5,21 +5,26 @@ import FormPersonal from "../../components/Form/FormPersonal";
 import dataUser from "../../data/dummy-userProfile.json";
 import FormFinance from "../../components/Form/FormFinance";
 import FormPhotoProfile from "../../components/Form/FormPhotoProfile";
+import CardTemplate from "../../components/Card/CardTemplate";
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState({
     email: "",
     name: "",
+    password: "",
+    confirmPassword: "",
     phone: "",
     noKtp: "",
-    noRekening: "",
-    bank: null,
+    finance: {
+      bank: "",
+      noRekening: "",
+    },
     address: {
-      province: null,
-      city: null,
-      district: null,
-      subDistrict: null,
-      postalCode: null,
+      province: "",
+      city: "",
+      district: "",
+      subDistrict: "",
+      postalCode: "",
     },
     image: null,
   });
@@ -48,87 +53,116 @@ const Profile = () => {
     }));
   };
 
+  if(userProfile.province === null) {
+    return <p>Loading...</p>
+  }
+
   return (
     <>
       <Breadcrumbs pageName="Profil" />
+
       <form
         onSubmit={handleUpdateProfile}
         className="grid grid-cols-5 gap-8 text-sm"
       >
         <section className="col-span-5 xl:col-span-3">
           {/* Personal Information */}
-          <div className="rounded-sm border border-gray-100 bg-white shadow-md mb-8">
-            <div className="border-b border-gray-100 py-4 px-7 ">
-              <h3 className="font-medium text-black">Informasi Pribadi</h3>
+          <CardTemplate
+            title={"Informasi Pribadi"}
+            padding={"7"}
+            containerClass={"mb-8"}
+            titleClass={"text-base"}
+            contentClass={"p-7"}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <FormPersonal
+                formData={userProfile}
+                handleInputChange={handleInputChange}
+              />
             </div>
-            <div className="p-7">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <FormPersonal
-                  formData={userProfile}
-                  handleInputChange={handleInputChange}
-                />
-              </div>
-            </div>
-          </div>
+          </CardTemplate>
 
           {/* Address Information */}
-          <div className="rounded-sm border border-gray-100 bg-white shadow-md mb-8">
-            <div className="border-b border-gray-100 py-4 px-7 ">
-              <h3 className="font-medium text-black">Alamat</h3>
+          <CardTemplate
+            title={"Alamat"}
+            padding={"7"}
+            containerClass={"mb-8"}
+            titleClass={"text-base"}
+            contentClass={"p-7"}
+          >
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <FormAddress
+                formData={userProfile}
+                setFormData={setUserProfile}
+                formatOptions={formatOptions}
+              />
             </div>
-            <div className="p-7">
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                <FormAddress
-                  formData={userProfile}
-                  setFormData={setUserProfile}
-                  formatOptions={formatOptions}
-                />
-              </div>
-            </div>
-          </div>
+          </CardTemplate>
 
           {/* Finance Information */}
-          <div className="rounded-sm border border-gray-100 bg-white shadow-md">
-            <div className="border-b border-gray-100 py-4 px-7 ">
-              <h3 className="font-medium text-black">Keuangan</h3>
+          <CardTemplate
+            title={"Keuangan"}
+            padding={"7"}
+            containerClass={"mb-8"}
+            titleClass={"text-base"}
+            contentClass={"p-7"}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <FormFinance
+                formData={userProfile}
+                setFormData={setUserProfile}
+                formatOptions={formatOptions}
+              />
             </div>
-            <div className="p-7">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <FormFinance
-                  formData={userProfile}
-                  handleInputChange={handleInputChange}
-                  setFormData={setUserProfile}
-                  formatOptions={formatOptions}
-                />
-              </div>
-            </div>
-          </div>
+          </CardTemplate>
         </section>
 
         <section className="col-span-5 xl:col-span-2">
           {/* User Image */}
-          <div className="rounded-sm border border-gray-100 bg-white shadow-md mb-8">
-            <div className="border-b border-gray-100 py-4 px-7 ">
-              <h3 className="font-medium text-black ">Foto kamu</h3>
-            </div>
-            <FormPhotoProfile formData={userProfile} setFormData={setUserProfile} />
-          </div>
+          <CardTemplate
+            title={"Foto kamu"}
+            padding={"7"}
+            containerClass={"mb-8"}
+            titleClass={"text-base"}
+            contentClass={"p-7"}
+          >
+            <FormPhotoProfile
+              formData={userProfile}
+              setFormData={setUserProfile}
+            />
+          </CardTemplate>
           {/* Button Submit Changed */}
           <div className="rounded-sm border border-gray-100 bg-white shadow-md">
-            <div className="flex gap-5 text-sm p-8">
-              <button
-                onClick={handleUpdateProfile}
-                className="flex justify-center rounded bg-orangePrimary py-2 px-6 font-medium text-white hover:bg-orangeSecondary"
-                type="submit"
-              >
-                Simpan Perubahan
-              </button>
-              <button
-                className="flex justify-center rounded border border-gray-100 py-2 px-6 font-medium text-black hover:shadow-sm"
-                type="button"
-              >
-                Batalkan
-              </button>
+            <div className="p-8 text-sm">
+              <div className=" mb-5 text-black font-medium space-y-1">
+                <p>
+                  Terakhir diubah pada :{" "}
+                  <span className="font-normal">
+                    {new Date().toLocaleDateString()}
+                  </span>
+                </p>
+                <p>
+                  Bergabung pada :{" "}
+                  <span className="font-normal">
+                    {new Date().toLocaleDateString()}
+                  </span>
+                </p>
+              </div>
+              <div className="flex gap-5">
+                <button
+                  onClick={handleUpdateProfile}
+                  className="flex justify-center rounded bg-orangePrimary py-2 px-6 font-medium text-white hover:bg-orangeSecondary"
+                  type="submit"
+                >
+                  Simpan Perubahan
+                </button>
+                <button
+                  className="flex justify-center rounded border border-gray-100 py-2 px-6 font-medium text-black hover:shadow-sm"
+                  type="button"
+                >
+                  Batalkan
+                </button>
+              </div>
             </div>
           </div>
         </section>

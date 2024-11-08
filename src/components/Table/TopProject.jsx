@@ -43,7 +43,7 @@ const TopProject = () => {
   ];
 
   return (
-    <div className="rounded-sm border border-gray-50 bg-white px-5 pt-6 pb-2.5 shadow-sm sm:px-7 xl:pb-1">
+    <div className="rounded-sm border border-gray-50 bg-white px-5 pt-6 pb-2.5 shadow-sm sm:px-7">
       <div className="flex justify-between items-center mb-6">
         <h4 className=" text-xl font-semibold text-black">
           Rekomendasi Proyek

@@ -5,10 +5,12 @@ import Pagination from "../../components/Pagination/Pagination";
 import CardTransaction from "../../components/Card/CardTransaction";
 import { FaRegClipboard, FaCheck, FaRegBuilding } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import CardTemplate from "../../components/Card/CardTemplate";
+import { useTransaction } from "../../context/TransactionContext";
 
 const Transaction = () => {
   const [transactions, setTransactions] = useState([]);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const { selectedTransaction, handleSelectTransaction } = useTransaction();
   const [page, setPage] = useState(1);
   const [isCopied, setIsCopied] = useState(false);
   const itemsPerPage = 5;
@@ -28,12 +30,6 @@ const Transaction = () => {
     setTransactions(dataTransaction.transaction);
   }, []);
 
-  // Handle selecting a transaction
-  const handleSelectTransaction = (transaction) => {
-    setSelectedTransaction(transaction);
-    setIsCopied(false); // Reset copy state when selecting a new transaction
-  };
-
   // Calculate pagination
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -43,14 +39,15 @@ const Transaction = () => {
   return (
     <>
       <Breadcrumbs pageName="Transaksi" mainRoute={"/dashboard"} />
-
-      <section className="w-full flex flex-col items-center mb-6 rounded-lg shadow-md bg-white p-6">
-        <h2 className="text-xl font-semibold mb-4 text-start w-full text-gray-800">
-          Detail Transaksi
-        </h2>
-
+      <CardTemplate
+        title={"Detail Transaksi"}
+        padding={"6"}
+        titleClass={"text-xl font-semibold"}
+        containerClass={"mb-8"}
+        contentClass={"p-6"}
+      >
         {selectedTransaction ? (
-          <div className="w-full p-4 rounded-lg shadow-sm bg-gray-50">
+          <div className="w-full p-4 shadow-sm bg-gray-50">
             {/* Nama Proyek */}
             <div className="flex items-center justify-between gap-2">
               <Link to={"/project/1"} className="flex gap-3 items-center">
@@ -139,15 +136,19 @@ const Transaction = () => {
             </div>
           </div>
         ) : (
-          <p className="text-gray-500">Tidak ada transaksi yang dipilih.</p>
+          <p className="text-gray-500 text-center">
+            Tidak ada transaksi yang dipilih.
+          </p>
         )}
-      </section>
-
-      <section className="w-full flex flex-col mb-6 rounded-lg shadow-md bg-white p-6">
-        <h2 className="text-xl font-semibold mb-4 text-black">
-          Daftar Transaksi
-        </h2>
-        <div className="flex flex-col gap-4 mb-6">
+      </CardTemplate>
+      <CardTemplate
+        title={"Detail Transaksi"}
+        padding={"6"}
+        titleClass={"text-xl font-semibold"}
+        containerClass={"mb-8"}
+        contentClass={"p-6"}
+      >
+        <div className="flex flex-col gap-4">
           {currentTransactions.map((transaction) => (
             <CardTransaction
               key={transaction.id}
@@ -157,8 +158,10 @@ const Transaction = () => {
             />
           ))}
         </div>
-        <Pagination page={page} totalPages={totalPages} setPage={setPage} />
-      </section>
+        <div className="mt-3">
+          <Pagination page={page} totalPages={totalPages} setPage={setPage} />
+        </div>
+      </CardTemplate>
     </>
   );
 };
