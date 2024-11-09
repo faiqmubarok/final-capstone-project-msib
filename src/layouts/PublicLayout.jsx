@@ -4,6 +4,7 @@ import PublicSidebar from "../components/Sidebar/PublicSidebar";
 import propTypes from "prop-types";
 import { useState } from "react";
 import ScrollToTop from "../components/ScrollToTop";
+import { AlertProvider } from "../context/AlertContext";
 
 const DefaultLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -23,6 +24,7 @@ const DefaultLayout = ({ children }) => {
         {children}
       </main>
       <ScrollToTop/>
+      <AlertProvider/>
 
       <PublicSidebar sidebarOpen={sidebarOpen} onSidebarClose={handleCloseSidebar} />
       <PublicFooter />

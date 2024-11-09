@@ -54,26 +54,27 @@ const FormPhotoProfile = ({ formData, setFormData }) => {
               className="h-full w-full object-cover transition-transform duration-200 transform scale-105"
             />
           ) : (
-            <div className="h-full w-full bg-gray-300 flex items-center justify-center text-gray-500 text-[10px] text-center">
-              No Image
+            <div className="h-full w-full bg-gray-300 flex items-center justify-center text-gray-500 text-[8px] text-center leading-3">
+              Tidak ada gambar
             </div>
           )}
         </div>
         <div>
           <span className="mb-1.5 text-black font-semibold">
-            Edit your photo
+            Ubah foto kamu
           </span>
           <span className="flex gap-2.5">
             {imagePreview ? (
               <button
+                type="button"
                 onClick={handleDelete}
                 className="text-sm text-red-600 hover:underline"
               >
-                Delete
+                Hapus
               </button>
             ) : (
-              <button className="text-sm text-blue-600 hover:underline">
-                Upload
+              <button type="button" className="text-sm text-blue-600 hover:underline">
+                Unggah
               </button>
             )}
           </span>

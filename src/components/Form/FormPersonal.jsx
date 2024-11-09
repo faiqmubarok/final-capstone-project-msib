@@ -42,6 +42,15 @@ const FormPersonal = ({formData, handleInputChange}) => {
         name="phone"
         autoComplete="tel"
       />
+      <Input
+        value={formData.job}
+        setValue={handleInputChange}
+        type="text"
+        id="job"
+        label="Pekerjaan"
+        placeholder="Pekerjaan"
+        name="job"
+      />
     </>
   );
 };

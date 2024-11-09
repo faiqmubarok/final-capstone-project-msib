@@ -38,6 +38,7 @@ const SelectOption = ({
         placeholder={placeholder}
         className="w-full"
         isSearchable
+        isDisabled={!option || option.length === 0}
         required
         autoComplete="off"
       />
@@ -55,7 +56,7 @@ SelectOption.propTypes = {
 };
 
 const customStyles = {
-  control: (provided) => ({
+  control: (provided, state) => ({
     ...provided,
     backgroundColor: "#f9fafb", // Tailwind bg-gray-50
     borderColor: "#d1d5db", // Tailwind border-gray-300
@@ -63,7 +64,7 @@ const customStyles = {
     borderRadius: "0.5rem", // Tailwind rounded-lg
     padding: "0.2rem", // Tailwind p-2.5
     boxShadow: "none",
-    cursor: "dissabled",
+    cursor: state.options && state.options.length > 0 ? "pointer" : "default",
     "&:focus": {
       borderColor: "#10b981", // Tailwind focus:border-greenPrimary
       outline: "none",

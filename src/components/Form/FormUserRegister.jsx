@@ -4,7 +4,7 @@ import FormAddress from "./FormAddress";
 import FormPersonal from "./FormPersonal";
 import FormFinance from "./FormFinance";
 
-const FormUserRegister = ({ formData, setFormData }) => {
+const FormUserRegister = ({ formData, setFormData, confirmPassword, setConfirmPassword }) => {
   const formatOptions = (data) => {
     return data?.map((item) => ({
       value: item.id,
@@ -70,13 +70,8 @@ const FormUserRegister = ({ formData, setFormData }) => {
             content="Password"
           />
           <Password
-            password={formData.confirmPassword}
-            setPassword={(value) =>
-              setFormData((prevData) => ({
-                ...prevData,
-                confirmPassword: value,
-              }))
-            }
+            password={confirmPassword}
+            setPassword={setConfirmPassword}
             content="Konfirmasi Password"
             id="confirm-password"
           />
@@ -89,6 +84,8 @@ const FormUserRegister = ({ formData, setFormData }) => {
 FormUserRegister.propTypes = {
   formData: propTypes.object,
   setFormData: propTypes.func,
+  confirmPassword: propTypes.string,
+  setConfirmPassword: propTypes.func,
 };
 
 export default FormUserRegister;
