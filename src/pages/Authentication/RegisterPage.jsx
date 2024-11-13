@@ -46,27 +46,35 @@ const RegisterPage = () => {
 
     // Membuat data yang akan dikirim
     const dataToSend = {
-      email: formRegister.email,
-      name: formRegister.name,
-      password: formRegister.password,
-      phone: formRegister.phone,
-      no_ktp: formRegister.noKtp,
-      job: formRegister.job,
-      address: {
-        province: formRegister.address.province,
-        city: formRegister.address.city,
-        district: formRegister.address.district,
-        sub_district: formRegister.address.subDistrict,
-        postal_code: formRegister.address.postalCode,
-      },
-      finance: {
-        bank: formRegister.finance.bank,
-        no_rekening: formRegister.finance.noRekening,
+      email: formRegister.email, // Email yang akan menjadi username di model User
+      password: formRegister.password, // Password untuk akun user
+      user_profile: {
+        // Data untuk UserProfile
+        name: formRegister.name, // Nama lengkap pengguna
+        phone: formRegister.phone, // Nomor telepon
+        no_ktp: formRegister.noKtp, // Nomor KTP
+        job: formRegister.job, // Pekerjaan
+        address: {
+          // Data alamat
+          province: formRegister.address.province, // Provinsi
+          city: formRegister.address.city, // Kota
+          district: formRegister.address.district, // Kecamatan
+          sub_district: formRegister.address.subDistrict, // Kelurahan
+          postal_code: formRegister.address.postalCode, // Kode pos
+        },
+        finance: {
+          // Data finansial
+          bank: formRegister.finance.bank, // Nama bank
+          no_rekening: formRegister.finance.noRekening, // Nomor rekening
+        },
       },
     };
 
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/`, dataToSend);
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/users/register/`,
+        dataToSend
+      );
       showAlert("success", "Registrasi Berhasil");
 
       // Mengosongkan form setelah registrasi berhasil
@@ -92,7 +100,10 @@ const RegisterPage = () => {
       setConfirmPassword("");
       navigate("/login");
     } catch (error) {
-      console.error("Registration failed:", error.response?.data || error.message);
+      console.error(
+        "Registration failed:",
+        error.response?.data || error.message
+      );
       const errorMessage =
         error.response?.data?.message || "Registrasi Gagal, silakan coba lagi.";
       showAlert("error", errorMessage);
