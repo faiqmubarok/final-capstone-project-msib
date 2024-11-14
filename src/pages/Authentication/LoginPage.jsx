@@ -1,15 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Form/Input";
 import Password from "../../components/Form/password";
 import Logo from "../../components/Logo";
 import ButtonBack from "../../components/ButtonBack";
-// import { useNavigate } from "react-router-dom";
 import { useAlert } from "../../context/AlertContext";
 import axios from "axios";
 
 const LoginPage = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { showAlert } = useAlert();
   const [loading, setLoading] = useState(false);
 
@@ -29,24 +28,35 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formUserLogin);
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/login/`,
+        `${import.meta.env.VITE_BACKEND_URL}/users/login/`,
         {
           email: formUserLogin.email,
           password: formUserLogin.password,
         }
       );
-      console.log(response);
-      showAlert("success", "Registrasi Berhasil");
-      setFormUserLogin;
-      // const mockAuthToken = "mockAuthToken12345";
-      // sessionStorage.setItem("authToken", mockAuthToken);
-      // navigate("/dashboard");
+      showAlert("success", "Login Berhasil");
+      setFormUserLogin({
+        email: "",
+        password: "",
+      });
+      const authData = {
+        accessToken: response.data.access,
+        refreshToken: response.data.refresh,
+        user: {
+          id: response.data.user.user_id,
+          name: response.data.user_profile.name,
+          job: response.data.user_profile.job,
+          photoProfile: response.data.user_profile.photoProfile,
+        },
+      };
+      sessionStorage.setItem("authToken", JSON.stringify(authData));
+      navigate("/dashboard");
     } catch (error) {
-      console.error("Login failed:", error.response?.data || error.message);
       const errorMessage =
-        error.response?.data?.message || "Login Gagal, silakan coba lagi.";
+        error.response?.data?.non_field_errors ||
+        "Terjadi Kesalahan pada server, silakan coba lagi.";
+
       showAlert("error", errorMessage);
     } finally {
       setLoading(false);

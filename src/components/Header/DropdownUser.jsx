@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ClickedOutside from "./ClickedOutside";
 import images from "../../images/images";
@@ -10,11 +10,25 @@ import { useNavigate } from "react-router-dom";
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: "",
+    job: "",
+    photoProfile: "",
+  });
+
+  useEffect(() => {
+    const storedAuthData = JSON.parse(sessionStorage.getItem("authToken"));
+    setUser({
+      name: storedAuthData.user.name,
+      job: storedAuthData.user.job,
+      photoProfile: storedAuthData.user.photoProfile ? `http://localhost:8000/${storedAuthData.user.photoProfile}` : "",
+    })
+  }, []);
 
   const handleLogout = () => {
     sessionStorage.removeItem("authToken");
     navigate("/");
-  }
+  };
 
   return (
     <ClickedOutside onClick={() => setDropdownOpen(false)} className="relative">
@@ -27,13 +41,13 @@ const DropdownUser = () => {
         >
           <span className="hidden text-right lg:block">
             <span className="block text-sm font-medium text-black">
-              Thomas Anree
+              {user.name}
             </span>
-            <span className="block text-xs">Pengusaha</span>
+            <span className="block text-xs">{user.job}</span>
           </span>
 
           <span className="h-12 w-12 rounded-full">
-            <img src={images.userPhotoProfile} alt="userProfile" />
+            <img src={user.photoProfile ? user.photoProfile : images.userPhotoProfile} alt="userProfile" />
           </span>
 
           <IoIosArrowDown className="w-4 h-4" />
@@ -56,7 +70,10 @@ const DropdownUser = () => {
                 </Link>
               </li>
             </ul>
-            <button onClick={handleLogout} className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-orangePrimary lg:text-base">
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-orangePrimary lg:text-base"
+            >
               <SlLogout className="w-5 h-5" />
               Keluar
             </button>

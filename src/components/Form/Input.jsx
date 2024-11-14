@@ -1,6 +1,16 @@
 import PropTypes from "prop-types";
 
-const Input = ({ value, setValue, type, id, label, placeholder, autoComplete, name }) => {
+const Input = ({
+  value,
+  setValue,
+  type,
+  id,
+  label,
+  placeholder,
+  autoComplete,
+  name,
+  isRequired = true,
+}) => {
   const handleChange = (e) => {
     setValue(e);
   };
@@ -15,13 +25,13 @@ const Input = ({ value, setValue, type, id, label, placeholder, autoComplete, na
       </label>
       <input
         type={type}
-        name={name} 
+        name={name}
         id={id}
         className="bg-gray-50 border border-gray-300 text-black rounded-lg focus:ring-greenPrimary focus:border-greenPrimary block w-full p-2.5"
         placeholder={placeholder}
-        required
         value={value}
-        onChange={handleChange} 
+        onChange={handleChange}
+        required={isRequired}
         autoComplete={autoComplete || "off"}
       />
     </div>
@@ -29,14 +39,15 @@ const Input = ({ value, setValue, type, id, label, placeholder, autoComplete, na
 };
 
 Input.propTypes = {
-  value: PropTypes.string.isRequired, 
-  setValue: PropTypes.func.isRequired, 
+  value: PropTypes.string.isRequired,
+  setValue: PropTypes.func.isRequired,
   type: PropTypes.string,
   placeholder: PropTypes.string,
-  label: PropTypes.string.isRequired, 
-  id: PropTypes.string.isRequired, 
+  label: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   autoComplete: PropTypes.string,
-  name: PropTypes.string.isRequired, 
+  name: PropTypes.string.isRequired,
+  isRequired: PropTypes.bool,
 };
 
 export default Input;

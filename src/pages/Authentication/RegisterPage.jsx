@@ -46,26 +46,23 @@ const RegisterPage = () => {
 
     // Membuat data yang akan dikirim
     const dataToSend = {
-      email: formRegister.email, // Email yang akan menjadi username di model User
-      password: formRegister.password, // Password untuk akun user
+      email: formRegister.email, 
+      password: formRegister.password, 
       user_profile: {
-        // Data untuk UserProfile
-        name: formRegister.name, // Nama lengkap pengguna
-        phone: formRegister.phone, // Nomor telepon
-        no_ktp: formRegister.noKtp, // Nomor KTP
-        job: formRegister.job, // Pekerjaan
+        name: formRegister.name, 
+        phone: formRegister.phone, 
+        no_ktp: formRegister.noKtp,
+        job: formRegister.job, 
         address: {
-          // Data alamat
-          province: formRegister.address.province, // Provinsi
-          city: formRegister.address.city, // Kota
-          district: formRegister.address.district, // Kecamatan
-          sub_district: formRegister.address.subDistrict, // Kelurahan
-          postal_code: formRegister.address.postalCode, // Kode pos
+          province: formRegister.address.province, 
+          city: formRegister.address.city,
+          district: formRegister.address.district, 
+          sub_district: formRegister.address.subDistrict,
+          postal_code: formRegister.address.postalCode, 
         },
         finance: {
-          // Data finansial
-          bank: formRegister.finance.bank, // Nama bank
-          no_rekening: formRegister.finance.noRekening, // Nomor rekening
+          bank: formRegister.finance.bank,
+          no_rekening: formRegister.finance.noRekening, 
         },
       },
     };
@@ -77,7 +74,6 @@ const RegisterPage = () => {
       );
       showAlert("success", "Registrasi Berhasil");
 
-      // Mengosongkan form setelah registrasi berhasil
       setFormRegister({
         email: "",
         name: "",
@@ -97,6 +93,7 @@ const RegisterPage = () => {
           postalCode: "",
         },
       });
+
       setConfirmPassword("");
       navigate("/login");
     } catch (error) {
@@ -104,8 +101,9 @@ const RegisterPage = () => {
         "Registration failed:",
         error.response?.data || error.message
       );
+      console.log(error);
       const errorMessage =
-        error.response?.data?.message || "Registrasi Gagal, silakan coba lagi.";
+        error.message || "Registrasi Gagal, silakan coba lagi.";
       showAlert("error", errorMessage);
     } finally {
       setLoading(false);

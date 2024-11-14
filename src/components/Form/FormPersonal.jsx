@@ -31,6 +31,7 @@ const FormPersonal = ({formData, handleInputChange}) => {
         label="No KTP"
         placeholder="1234567890"
         name="noKtp"
+        isRequired={false}
       />
       <Input
         value={formData.phone}
@@ -41,6 +42,7 @@ const FormPersonal = ({formData, handleInputChange}) => {
         placeholder="08123456789"
         name="phone"
         autoComplete="tel"
+        isRequired={false}
       />
       <Input
         value={formData.job}
@@ -50,6 +52,7 @@ const FormPersonal = ({formData, handleInputChange}) => {
         label="Pekerjaan"
         placeholder="Pekerjaan"
         name="job"
+        isRequired={false}
       />
     </>
   );
