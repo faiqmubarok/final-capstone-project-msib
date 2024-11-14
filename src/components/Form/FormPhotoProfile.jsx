@@ -88,7 +88,7 @@ const FormPhotoProfile = ({ formData, setFormData }) => {
         <input
           key={fileInputKey}
           type="file"
-          accept="image/*"
+          accept="image/jpeg, image/png, image/gif"
           onChange={handleImageChange}
           disabled={isInputDisabled} // Nonaktifkan input jika sudah ada gambar
           className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none disabled:cursor-not-allowed"
@@ -104,7 +104,7 @@ const FormPhotoProfile = ({ formData, setFormData }) => {
               <span className="text-orangePrimary">Klik untuk mengunggah</span>
             )}
           </p>
-          <p className="mt-1.5 text-gray-700">SVG, PNG, JPG, atau GIF</p>
+          <p className="mt-1.5 text-gray-700">PNG, JPG, JPEG, atau GIF</p>
           <p className="mt-1.5 text-gray-700">Ukuran maksimal: 800 KB</p>
         </div>
       </div>

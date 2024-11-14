@@ -10,6 +10,8 @@ const Input = ({
   autoComplete,
   name,
   isRequired = true,
+  isDisabled = false,
+  isReadOnly = false,
 }) => {
   const handleChange = (e) => {
     setValue(e);
@@ -33,6 +35,8 @@ const Input = ({
         onChange={handleChange}
         required={isRequired}
         autoComplete={autoComplete || "off"}
+        disabled={isDisabled}
+        readOnly={isReadOnly}
       />
     </div>
   );
@@ -48,6 +52,8 @@ Input.propTypes = {
   autoComplete: PropTypes.string,
   name: PropTypes.string.isRequired,
   isRequired: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  isReadOnly: PropTypes.bool,
 };
 
 export default Input;

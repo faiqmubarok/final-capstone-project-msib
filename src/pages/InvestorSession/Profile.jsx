@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import FormAddress from "../../components/Form/FormAddress";
 import FormPersonal from "../../components/Form/FormPersonal";
-import dataUser from "../../data/dummy-userProfile.json";
 import FormFinance from "../../components/Form/FormFinance";
 import FormPhotoProfile from "../../components/Form/FormPhotoProfile";
 import CardTemplate from "../../components/Card/CardTemplate";
+import axios from "axios";
+import { formatDistanceToNow, parseISO } from "date-fns";
+import { id } from "date-fns/locale";
+import { useAlert } from "../../context/AlertContext";
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState({
@@ -15,6 +18,10 @@ const Profile = () => {
     confirmPassword: "",
     phone: "",
     noKtp: "",
+    job: "",
+    image: null,
+    lastUpdate: "",
+    dateJoined: "",
     finance: {
       bank: "",
       noRekening: "",
@@ -26,11 +33,48 @@ const Profile = () => {
       subDistrict: "",
       postalCode: "",
     },
-    image: null,
   });
+  const { showAlert } = useAlert();
+
+  const fetchUser = async () => {
+    try {
+      const userId = JSON.parse(sessionStorage.getItem("authToken")).user.id;
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/users/getUser/${userId}/`
+      );
+      showAlert("success", "Data berhasil diambil");
+      setUserProfile({
+        ...userProfile,
+        email: response.data.email || "",
+        name: response.data.name || "",
+        phone: response.data.phone || "",
+        noKtp: response.data.no_ktp || "",
+        job: response.data.job || "",
+        lastUpdate: response.data.last_update || "",
+        dateJoined: response.data.date_joined.slice(0, 10) || "",
+        image: response.data.photoProfile
+          ? `${import.meta.env.VITE_BACKEND_URL}${response.data.photoProfile}`
+          : null,
+        finance: {
+          bank: response.data.finance.bank || "",
+          noRekening: response.data.finance.no_rekening || "",
+        },
+        address: {
+          province: response.data.address.province || "",
+          city: response.data.address.city || "",
+          district: response.data.address.district || "",
+          subDistrict: response.data.address.sub_district || "",
+          postalCode: response.data.address.postal_code || "",
+        },
+      });
+    } catch (error) {
+      showAlert("error", error.detail);
+    }
+  };
 
   useEffect(() => {
-    setUserProfile(dataUser);
+    fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleUpdateProfile = (e) => {
@@ -53,9 +97,13 @@ const Profile = () => {
     }));
   };
 
-  if(userProfile.province === null) {
-    return <p>Loading...</p>
-  }
+  const formattedLastUpdate = (lastUpdate) => {
+    if (!lastUpdate) return "Tanggal tidak valid";
+    return formatDistanceToNow(parseISO(lastUpdate), {
+      addSuffix: true,
+      locale: id,
+    });
+  };
 
   return (
     <>
@@ -137,15 +185,11 @@ const Profile = () => {
               <div className=" mb-5 text-black font-medium space-y-1">
                 <p>
                   Terakhir diubah pada :{" "}
-                  <span className="font-normal">
-                    {new Date().toLocaleDateString()}
-                  </span>
+                  <span className="font-normal">{formattedLastUpdate(userProfile.lastUpdate)}</span>
                 </p>
                 <p>
                   Bergabung pada :{" "}
-                  <span className="font-normal">
-                    {new Date().toLocaleDateString()}
-                  </span>
+                  <span className="font-normal">{userProfile.dateJoined}</span>
                 </p>
               </div>
               <div className="flex gap-5">
@@ -159,6 +203,7 @@ const Profile = () => {
                 <button
                   className="flex justify-center rounded border border-gray-100 py-2 px-6 font-medium text-black hover:shadow-sm"
                   type="button"
+                  onClick={() => fetchUser()}
                 >
                   Batalkan
                 </button>
