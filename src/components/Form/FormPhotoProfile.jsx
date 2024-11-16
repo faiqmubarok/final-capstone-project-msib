@@ -4,19 +4,21 @@ import propTypes from "prop-types";
 
 const FormPhotoProfile = ({ formData, setFormData }) => {
   const [imagePreview, setImagePreview] = useState(null);
-  const [fileInputKey, setFileInputKey] = useState(Date.now());
   const [uploadMessage, setUploadMessage] = useState("");
-  const [isInputDisabled, setIsInputDisabled] = useState(false); // State untuk mengontrol status input
+  const [isInputDisabled, setIsInputDisabled] = useState(false); 
 
-  // useEffect untuk menampilkan gambar yang sudah ada di formData.image
+  // Menampilkan preview gambar jika sudah ada di formData.image
   useEffect(() => {
     if (formData.image) {
-      setImagePreview(
-        typeof formData.image === "string"
-          ? formData.image
-          : URL.createObjectURL(formData.image)
-      );
-      setIsInputDisabled(true); // Nonaktifkan input jika sudah ada gambar
+      if (typeof formData.image === "string") {
+        // Jika formData.image adalah URL, langsung tampilkan gambar
+        setImagePreview(formData.image);
+        setIsInputDisabled(true); // Nonaktifkan input jika sudah ada gambar
+      } else {
+        // Jika formData.image adalah file, tampilkan preview
+        setImagePreview(URL.createObjectURL(formData.image));
+        setIsInputDisabled(true); // Nonaktifkan input setelah gambar diunggah
+      }
     }
   }, [formData.image]);
 
@@ -24,12 +26,11 @@ const FormPhotoProfile = ({ formData, setFormData }) => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 800 * 1024) {
-        // Batas ukuran 800KB
         setUploadMessage("File terlalu besar. Maksimal 800KB.");
         return;
       }
       setFormData((prev) => ({ ...prev, image: file }));
-      setImagePreview(URL.createObjectURL(file));
+      setImagePreview(URL.createObjectURL(file)); // Tampilkan preview gambar
       setUploadMessage("Gambar berhasil diunggah!");
       setIsInputDisabled(true); // Nonaktifkan input setelah gambar diunggah
     }
@@ -38,7 +39,6 @@ const FormPhotoProfile = ({ formData, setFormData }) => {
   const handleDelete = () => {
     setFormData((prev) => ({ ...prev, image: null }));
     setImagePreview(null);
-    setFileInputKey(Date.now());
     setUploadMessage("Gambar telah dihapus.");
     setIsInputDisabled(false); // Aktifkan kembali input setelah gambar dihapus
   };
@@ -86,11 +86,10 @@ const FormPhotoProfile = ({ formData, setFormData }) => {
         className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded-lg border border-dashed border-orangePrimary bg-gray-100 py-4 px-4 sm:py-7"
       >
         <input
-          key={fileInputKey}
           type="file"
           accept="image/jpeg, image/png, image/gif"
           onChange={handleImageChange}
-          disabled={isInputDisabled} // Nonaktifkan input jika sudah ada gambar
+          disabled={isInputDisabled} 
           className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none disabled:cursor-not-allowed"
         />
         <div className="flex flex-col items-center justify-center space-y-3">
@@ -116,8 +115,8 @@ const FormPhotoProfile = ({ formData, setFormData }) => {
 };
 
 FormPhotoProfile.propTypes = {
-  formData: propTypes.object,
-  setFormData: propTypes.func,
+  formData: propTypes.object.isRequired,
+  setFormData: propTypes.func.isRequired,
 };
 
 export default FormPhotoProfile;

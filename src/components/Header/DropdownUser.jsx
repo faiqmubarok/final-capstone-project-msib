@@ -46,8 +46,8 @@ const DropdownUser = () => {
             <span className="block text-xs">{user.job}</span>
           </span>
 
-          <span className="h-12 w-12 rounded-full">
-            <img src={user.photoProfile ? user.photoProfile : images.userPhotoProfile} alt="userProfile" />
+          <span className="h-12 w-12 rounded-full overflow-hidden drop-shadow-md">
+            <img className="h-full w-full" src={user.photoProfile ? user.photoProfile : images.userPhotoProfile} alt="userProfile" />
           </span>
 
           <IoIosArrowDown className="w-4 h-4" />

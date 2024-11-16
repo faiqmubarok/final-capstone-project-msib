@@ -14,14 +14,10 @@ const Profile = () => {
   const [userProfile, setUserProfile] = useState({
     email: "",
     name: "",
-    password: "",
-    confirmPassword: "",
     phone: "",
     noKtp: "",
     job: "",
     image: null,
-    lastUpdate: "",
-    dateJoined: "",
     finance: {
       bank: "",
       noRekening: "",
@@ -36,13 +32,17 @@ const Profile = () => {
   });
   const { showAlert } = useAlert();
 
+  useEffect(() => {
+    fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const fetchUser = async () => {
     try {
       const userId = JSON.parse(sessionStorage.getItem("authToken")).user.id;
       const response = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/users/getUser/${userId}/`
       );
-      showAlert("success", "Data berhasil diambil");
       setUserProfile({
         ...userProfile,
         email: response.data.email || "",
@@ -68,18 +68,63 @@ const Profile = () => {
         },
       });
     } catch (error) {
-      showAlert("error", error.detail);
+      console.log(error);
+      showAlert("error", "Gagal memuat data pengguna.");
     }
   };
 
-  useEffect(() => {
-    fetchUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const updateUser = async (dataToSend) => {
+    try {
+      const userId = JSON.parse(sessionStorage.getItem("authToken")).user.id;
+      await axios.patch(
+        `${import.meta.env.VITE_BACKEND_URL}/users/updateUser/${userId}/`,
+        dataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Wajib untuk mengirim file
+          },
+        }
+      );
+      showAlert("success", "Data berhasil diupdate");
+      await fetchUser();
+      setNewSessionStorage();
+    } catch (error) {
+      console.log(error);
+      showAlert("error", "Gagal mengupdte data.");
+    }
+  };
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
-    console.log("Profil diupdate:", userProfile);
+    const dataToSend = {
+      name: userProfile.name,
+      no_ktp: userProfile.noKtp,
+      phone: userProfile.phone,
+      email: userProfile.email,
+      job: userProfile.job,
+      photoProfile: userProfile.image,
+      address: {
+        province: userProfile.address.province,
+        city: userProfile.address.city,
+        district: userProfile.address.district,
+        sub_district: userProfile.address.subDistrict,
+        postal_code: userProfile.address.postalCode,
+      },
+      finance: {
+        bank: userProfile.finance.bank,
+        no_rekening: userProfile.finance.noRekening,
+      },
+    };
+    updateUser(dataToSend);
+  };
+
+  const setNewSessionStorage = () => {
+    const sessionStorageData = JSON.parse(sessionStorage.getItem("authToken"));
+    sessionStorageData.user.name = userProfile.name;
+    sessionStorageData.user.job = userProfile.job;
+    sessionStorageData.user.photoProfile = userProfile.image? `media/profilePictures/${userProfile.image.name}` : "";
+    console.log(sessionStorageData.user.photoProfile);
+    sessionStorage.setItem("authToken", JSON.stringify(sessionStorageData));
   };
 
   const handleInputChange = (e) => {
@@ -112,6 +157,7 @@ const Profile = () => {
       <form
         onSubmit={handleUpdateProfile}
         className="grid grid-cols-5 gap-8 text-sm"
+        encType="multipart/form-data"
       >
         <section className="col-span-5 xl:col-span-3">
           {/* Personal Information */}
@@ -185,7 +231,9 @@ const Profile = () => {
               <div className=" mb-5 text-black font-medium space-y-1">
                 <p>
                   Terakhir diubah pada :{" "}
-                  <span className="font-normal">{formattedLastUpdate(userProfile.lastUpdate)}</span>
+                  <span className="font-normal">
+                    {formattedLastUpdate(userProfile.lastUpdate)}
+                  </span>
                 </p>
                 <p>
                   Bergabung pada :{" "}
