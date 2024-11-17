@@ -1,11 +1,11 @@
 import { CiSearch } from "react-icons/ci";
 import { useState, useEffect } from "react";
-import data from "../../data/dummy-projects.json";
+// import data from "../../data/dummy-projects.json";
 import { Link } from "react-router-dom";
 import ClickedOutside from "../Header/ClickedOutside";
 import propTypes from "prop-types";
 
-const SearchProject = ({ onSearch }) => {
+const SearchProject = ({ onSearch, allProjects }) => {
   const [search, setSearch] = useState("");
   const [debouncedInput, setDebouncedInput] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -29,12 +29,12 @@ const SearchProject = ({ onSearch }) => {
     }
 
     // Filter the data based on the search input
-    const filteredResults = data.data.filter((project) =>
+    const filteredResults = allProjects.filter((project) =>
       project.name.toLowerCase().includes(debouncedInput.toLowerCase())
     );
 
     setSearchResult(filteredResults);
-  }, [debouncedInput]);
+  }, [debouncedInput, allProjects]);
 
   // Saat form dikirim, kirim hasil pencarian ke komponen induk
   const handleSubmit = (e) => {
@@ -95,6 +95,7 @@ const SearchProject = ({ onSearch }) => {
 
 SearchProject.propTypes = {
   onSearch: propTypes.func,
+  allProjects: propTypes.array,
 };
 
 export default SearchProject;

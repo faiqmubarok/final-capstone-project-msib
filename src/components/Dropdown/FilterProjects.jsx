@@ -1,9 +1,9 @@
-import { useState } from "react";
+import {useState } from "react";
 import ClickedOutside from "../Header/ClickedOutside";
 import { IoIosArrowDown } from "react-icons/io";
 import propTypes from "prop-types";
 
-const FilterProjects = ({ selectedFilter, setSelectedFilter }) => {
+const FilterProjects = ({ selectedFilter, setSelectedFilter, options, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -15,12 +15,10 @@ const FilterProjects = ({ selectedFilter, setSelectedFilter }) => {
     setIsOpen(false);
   };
 
-  const options = ["Semua", "Pertanian", "Peternakan", "Perikanan"];
-
   return (
     <ClickedOutside
       onClick={() => setIsOpen(false)}
-      className={"w-1/2 md:w-fit"}
+      className={"w-full md:w-fit"}
     >
       <div className="relative text-left w-full">
         <button
@@ -28,7 +26,7 @@ const FilterProjects = ({ selectedFilter, setSelectedFilter }) => {
           onClick={toggleDropdown}
           className="inline-flex justify-between w-full items-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 gap-2"
         >
-          {selectedFilter}
+          {children}
           <IoIosArrowDown className="w-4 h-4" />
         </button>
         {isOpen && (
@@ -56,6 +54,8 @@ const FilterProjects = ({ selectedFilter, setSelectedFilter }) => {
 FilterProjects.propTypes = {
   selectedFilter: propTypes.string,
   setSelectedFilter: propTypes.func,
+  options: propTypes.array,
+  children: propTypes.node
 };
 
 export default FilterProjects;
