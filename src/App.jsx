@@ -8,13 +8,13 @@ import AppProvider from "./context/AppProvider";
 // Layout
 import PublicLayout from "./layouts/PublicLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
-import AdminLayout from "./layouts/AdminLayout";
 
 // Public Pages
 import HomePage from "./pages/PublicSession/HomePage";
 import CostumerPage from "./pages/PublicSession/CostumerPage";
 import AboutPage from "./pages/PublicSession/AboutPage";
 import HelpPage from "./pages/PublicSession/HelpPage";
+import NotFound from "./pages/NotFound";
 
 // Authentication
 import LoginPage from "./pages/Authentication/LoginPage";
@@ -28,9 +28,6 @@ import DetailProject from "./pages/InvestorSession/DetailProject";
 import Profile from "./pages/InvestorSession/Profile";
 import Portfolio from "./pages/InvestorSession/Portfolio";
 
-// Admin Pages
-import DashboardAdmin from "./pages/AdminSession/DashboardAdmin";
-
 const isAuthenticated = () => {
   return !!sessionStorage.getItem("authToken");
 };
@@ -38,7 +35,6 @@ const isAuthenticated = () => {
 const App = () => {
   const { pathname } = useLocation();
   const userIsLoggedIn = isAuthenticated();
-  const adminIsLoggedIn = true;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -172,21 +168,6 @@ const App = () => {
           }
         />
 
-        {/* Admin Session */}
-        <Route
-          path="/dashboard-admin"
-          element={
-            adminIsLoggedIn ? (
-              <AdminLayout>
-                <PageTitle title={"Admin | Patani"} />
-                <DashboardAdmin />
-              </AdminLayout>
-            ) : (
-              <LoginPage />
-            )
-          }
-        />
-
         {/* Authentication */}
         <Route
           path="/login"
@@ -203,6 +184,17 @@ const App = () => {
             <>
               <PageTitle title={"Daftar | Patani"} />
               <RegisterPage />
+            </>
+          }
+        />
+
+        {/* Not Found Page */}
+        <Route
+          path="*"
+          element={
+            <>
+              <PageTitle title={"Not Found Page | Patani"} />
+              <NotFound />
             </>
           }
         />
