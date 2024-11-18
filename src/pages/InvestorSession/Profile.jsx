@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
-import FormAddress from "../../components/Form/FormAddress";
-import FormPersonal from "../../components/Form/FormPersonal";
-import FormFinance from "../../components/Form/FormFinance";
-import FormPhotoProfile from "../../components/Form/FormPhotoProfile";
-import CardTemplate from "../../components/Card/CardTemplate";
-import axios from "axios";
+import { useEffect, useState, Suspense, lazy } from "react";
 import { formatDistanceToNow, parseISO } from "date-fns";
+import axios from "axios";
 import { id } from "date-fns/locale";
 import { useAlert } from "../../context/AlertContext";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import CardTemplate from "../../components/Card/CardTemplate";
+const FormAddress = lazy(() => import("../../components/Form/FormAddress"));
+const FormPersonal = lazy(() => import("../../components/Form/FormPersonal"));
+const FormFinance = lazy(() => import("../../components/Form/FormFinance"));
+const FormPhotoProfile = lazy(() =>
+  import("../../components/Form/FormPhotoProfile")
+);
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState({
@@ -122,7 +124,9 @@ const Profile = () => {
     const sessionStorageData = JSON.parse(sessionStorage.getItem("authToken"));
     sessionStorageData.user.name = userProfile.name;
     sessionStorageData.user.job = userProfile.job;
-    sessionStorageData.user.photoProfile = userProfile.image? `media/profilePictures/${userProfile.image.name}` : "";
+    sessionStorageData.user.photoProfile = userProfile.image
+      ? `media/profilePictures/${userProfile.image.name}`
+      : "";
     console.log(sessionStorageData.user.photoProfile);
     sessionStorage.setItem("authToken", JSON.stringify(sessionStorageData));
   };
@@ -168,12 +172,20 @@ const Profile = () => {
             titleClass={"text-base"}
             contentClass={"p-7"}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <FormPersonal
-                formData={userProfile}
-                handleInputChange={handleInputChange}
-              />
-            </div>
+            <Suspense
+              fallback={
+                <div className="w-full p-4 flex justify-center items-center font-medium">
+                  Memuat...
+                </div>
+              }
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <FormPersonal
+                  formData={userProfile}
+                  handleInputChange={handleInputChange}
+                />
+              </div>
+            </Suspense>
           </CardTemplate>
 
           {/* Address Information */}
@@ -184,13 +196,21 @@ const Profile = () => {
             titleClass={"text-base"}
             contentClass={"p-7"}
           >
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <FormAddress
-                formData={userProfile}
-                setFormData={setUserProfile}
-                formatOptions={formatOptions}
-              />
-            </div>
+            <Suspense
+              fallback={
+                <div className="w-full p-4 flex justify-center items-center font-medium">
+                  Memuat...
+                </div>
+              }
+            >
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <FormAddress
+                  formData={userProfile}
+                  setFormData={setUserProfile}
+                  formatOptions={formatOptions}
+                />
+              </div>
+            </Suspense>
           </CardTemplate>
 
           {/* Finance Information */}
@@ -201,13 +221,21 @@ const Profile = () => {
             titleClass={"text-base"}
             contentClass={"p-7"}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <FormFinance
-                formData={userProfile}
-                setFormData={setUserProfile}
-                formatOptions={formatOptions}
-              />
-            </div>
+            <Suspense
+              fallback={
+                <div className="w-full p-4 flex justify-center items-center font-medium">
+                  Memuat...
+                </div>
+              }
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <FormFinance
+                  formData={userProfile}
+                  setFormData={setUserProfile}
+                  formatOptions={formatOptions}
+                />
+              </div>
+            </Suspense>
           </CardTemplate>
         </section>
 
@@ -220,10 +248,18 @@ const Profile = () => {
             titleClass={"text-base"}
             contentClass={"p-7"}
           >
-            <FormPhotoProfile
-              formData={userProfile}
-              setFormData={setUserProfile}
-            />
+            <Suspense
+              fallback={
+                <div className="w-full p-4 flex justify-center items-center font-medium">
+                  Memuat...
+                </div>
+              }
+            >
+              <FormPhotoProfile
+                formData={userProfile}
+                setFormData={setUserProfile}
+              />
+            </Suspense>
           </CardTemplate>
           {/* Button Submit Changed */}
           <div className="rounded-sm border border-gray-100 bg-white shadow-md">
