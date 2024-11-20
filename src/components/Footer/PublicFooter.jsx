@@ -18,7 +18,7 @@ const Footer = () => {
   ];
 
   const navigation = [
-    { name: "Pemodal", href: "/financer" },
+    { name: "Pemodal", href: "/" },
     { name: "Nasabah", href: "/costumer" },
     { name: "Tentang Kami", href: "/about" },
     { name: "Bantuan", href: "/help" },

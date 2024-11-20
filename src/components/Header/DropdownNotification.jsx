@@ -42,7 +42,7 @@ const DropdownNotification = () => {
             {/* Header Title */}
 
             {/* List Notification */}
-            <ul className="flex h-auto flex-col overflow-y-auto text-gray-500">
+            <ul className="flex h-auto flex-col overflow-y-auto text-gray-500 no-scrollbar">
               <li>
                 <Link
                   className="flex flex-col gap-2.5 border-t border-gray-200 px-4 py-3 hover:bg-gray-50"

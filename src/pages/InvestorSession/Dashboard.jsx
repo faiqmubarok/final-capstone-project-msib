@@ -39,7 +39,10 @@ const DashboardPage = () => {
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 xl:gap-7">
-        <CardDataStats total={dataStats.project.total.toString()} title="Proyek">
+        <CardDataStats
+          total={dataStats.project.total.toString()}
+          title="Proyek"
+        >
           <GoProjectRoadmap className="w-6 h-6 text-greenPrimary" />
         </CardDataStats>
         <CardDataStats
@@ -89,7 +92,9 @@ const DashboardPage = () => {
             title={"Transaksi terbaru"}
             padding={"5"}
             titleClass={"text-xl font-semibold"}
-            contentClass={"md:max-h-96 overflow-y-auto space-y-4 p-5"}
+            contentClass={
+              "md:max-h-96 overflow-y-auto space-y-4 p-5 no-scrollbar"
+            }
           >
             {transactions.slice(0, 5).map((transaction) => (
               <CardTransaction key={transaction.id} transaction={transaction} />
@@ -102,7 +107,6 @@ const DashboardPage = () => {
           </div>
         </div>
       </div>
-
     </>
   );
 };

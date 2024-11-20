@@ -1,5 +1,6 @@
 import proptypes from "prop-types";
 import { Link } from "react-router-dom";
+import React from "react";
 
 const Breadcrumbs = ({ mainRoute, pageName, pageLink }) => {
   return (
@@ -21,16 +22,15 @@ const Breadcrumbs = ({ mainRoute, pageName, pageLink }) => {
           </li>
           {pageLink &&
             pageLink.map((link, index) => (
-              <>
+              <React.Fragment key={index}>
                 <Link
                   className="font-medium hover:text-orangePrimary"
                   to={link.link}
-                  key={index}
                 >
                   {link.name}
                 </Link>
                 <span> /</span>
-              </>
+              </React.Fragment>
             ))}
           <li className=" text-orangePrimary">{pageName}</li>
         </ol>

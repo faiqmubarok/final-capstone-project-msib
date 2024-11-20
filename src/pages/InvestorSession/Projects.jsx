@@ -17,10 +17,11 @@ const ProjectPage = () => {
     const fetchProjects = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/projects/`
+          `${import.meta.env.VITE_BACKEND_URL}/projects/allProject/`
         );
         const data = await response.json();
         setAllProjects(Array.isArray(data.data) ? data.data : []);
+        console.log(data);
       } catch (error) {
         console.error("Fetch Error:", error);
       }
