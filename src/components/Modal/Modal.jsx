@@ -11,7 +11,7 @@ const Modal = ({ children, onClose }) => {
       <ClickedOutside exceptionRef={modalRef} onClick={onClose}>
         <div
           ref={modalRef}
-          className="rounded-sm border border-gray-100 bg-white shadow-md min-w-[300px]"
+          className="rounded-sm border border-gray-100 bg-white shadow-md min-w-[300px] md:min-w-[400px] lg:min-w-[500px]"
         >
           {children}
         </div>
@@ -22,7 +22,7 @@ const Modal = ({ children, onClose }) => {
 
 const Header = ({ title, onClose }) => {
   return (
-    <div className="flex items-center justify-between mb-4 border-b border-gray-200 py-4 px-8 gap-4">
+    <div className="flex items-center justify-between border-b border-gray-200 py-4 px-6 gap-4">
       <h1 className="text-xl font-semibold text-black">{title}</h1>
       <button
         className="p-2 bg-gray-100 hover:text-orangePrimary rounded-lg transition-colors duration-150"

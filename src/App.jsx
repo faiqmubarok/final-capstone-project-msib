@@ -27,6 +27,7 @@ import Transaction from "./pages/InvestorSession/Transaction";
 import DetailProject from "./pages/InvestorSession/DetailProject";
 import Profile from "./pages/InvestorSession/Profile";
 import Portfolio from "./pages/InvestorSession/Portfolio";
+import TopUp from "./pages/InvestorSession/Topup";
 
 const isAuthenticated = () => {
   return !!sessionStorage.getItem("authToken");
@@ -161,6 +162,19 @@ const App = () => {
               <DashboardLayout>
                 <PageTitle title={"Profile | Patani"} />
                 <Profile />
+              </DashboardLayout>
+            ) : (
+              <LoginPage />
+            )
+          }
+        />
+        <Route
+          path="/topup"
+          element={
+            userIsLoggedIn ? (
+              <DashboardLayout>
+                <PageTitle title={"Top Up | Patani"} />
+                <TopUp/>
               </DashboardLayout>
             ) : (
               <LoginPage />

@@ -93,7 +93,7 @@ const DashboardPage = () => {
             padding={"5"}
             titleClass={"text-xl font-semibold"}
             contentClass={
-              "md:max-h-96 overflow-y-auto space-y-4 p-5 no-scrollbar"
+              "md:max-h-[370px] overflow-y-auto space-y-4 p-5 no-scrollbar"
             }
           >
             {transactions.slice(0, 5).map((transaction) => (

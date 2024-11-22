@@ -6,6 +6,7 @@ import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import Modal from "../../components/Modal/Modal";
 import CardTemplate from "../../components/Card/CardTemplate";
 import CardDataStats from "../../components/Card/CardDataStats";
+import FormTopup from "../../components/Form/FormTopup";
 import { IoMdTime, IoIosTimer } from "react-icons/io";
 import { FaRegBuilding } from "react-icons/fa";
 import { IoLocationOutline } from "react-icons/io5";
@@ -264,10 +265,15 @@ const DetailProject = () => {
                 padding={"6"}
                 contentClass={"p-6 text-justify text-gray-600 text-sm"}
               >
-                <label className="block mb-2 text-gray-600">
+                <label
+                  htmlFor="simulation"
+                  className="block mb-2 text-gray-600"
+                >
                   Jumlah Investasi (Rp):
                 </label>
                 <input
+                  id="simulation"
+                  name="simulation"
                   type="text"
                   inputMode="numeric"
                   value={investmentData.investment.toLocaleString("id-ID")}
@@ -307,49 +313,10 @@ const DetailProject = () => {
           {isModalOpen && (
             <Modal onClose={() => setIsModalOpen(false)}>
               <Modal.Header
-                title="Top-Up Saldo"
+                title="Setor Dana"
                 onClose={() => setIsModalOpen(false)}
               />
-              <div className="p-6 space-y-4">
-                <h2 className="text-lg font-semibold">
-                  Masukkan Jumlah Top-Up
-                </h2>
-                <input
-                  type="number"
-                  placeholder="Contoh: 500000"
-                  className="w-full p-2 border rounded-md"
-                />
-
-                <h2 className="text-lg font-semibold mt-4">
-                  Pilih Metode Pembayaran
-                </h2>
-                <div className="space-y-2">
-                  <label className="flex items-center space-x-3">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="bank_transfer"
-                    />
-                    <span>Bank Transfer</span>
-                  </label>
-                  <label className="flex items-center space-x-3">
-                    <input type="radio" name="paymentMethod" value="e_wallet" />
-                    <span>E-Wallet (Gopay, OVO, dll.)</span>
-                  </label>
-                  <label className="flex items-center space-x-3">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="credit_card"
-                    />
-                    <span>Kartu Kredit</span>
-                  </label>
-                </div>
-
-                <button className="w-full bg-green-500 text-white font-semibold py-2 rounded-md mt-4 hover:bg-green-600 transition-colors">
-                  Konfirmasi Top-Up
-                </button>
-              </div>
+              <FormTopup setIsModalOpen={setIsModalOpen} />
             </Modal>
           )}
         </>
