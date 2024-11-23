@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import dataTransaction from "../../data/dummy-transaction.json";
+import { useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import Pagination from "../../components/Pagination/Pagination";
 import CardTransaction from "../../components/Card/CardTransaction";
@@ -7,15 +6,15 @@ import { FaRegClipboard, FaCheck, FaRegBuilding } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import CardTemplate from "../../components/Card/CardTemplate";
 import { useTransaction } from "../../context/TransactionContext";
+import useFetchTransaction from "../../hooks/useFetchTransaction";
 
 const Transaction = () => {
-  const [transactions, setTransactions] = useState([]);
   const { selectedTransaction, handleSelectTransaction } = useTransaction();
   const [page, setPage] = useState(1);
   const [isCopied, setIsCopied] = useState(false);
-  const itemsPerPage = 5;
+  const userId = JSON.parse(sessionStorage.getItem("authToken")).user.id;
+  const { transactions, loading } = useFetchTransaction({ userId });
 
-  // Copy transaction ID to clipboard
   const handleCopy = () => {
     if (selectedTransaction) {
       navigator.clipboard.writeText(selectedTransaction.id).then(() => {
@@ -25,16 +24,7 @@ const Transaction = () => {
     }
   };
 
-  // Load transactions from JSON on mount
-  useEffect(() => {
-    setTransactions(dataTransaction.transaction);
-  }, []);
-
-  // Calculate pagination
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentTransactions = transactions.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(transactions.length / itemsPerPage);
+  const currentTransactions = transactions.slice((page - 1) * 5, page * 5);
 
   return (
     <>
@@ -50,21 +40,36 @@ const Transaction = () => {
           <div className="w-full p-4 shadow-sm bg-gray-50">
             {/* Nama Proyek */}
             <div className="flex items-center justify-between gap-2">
-              <Link to={"/project/1"} className="flex gap-3 items-center">
-                <FaRegBuilding className="w-6 h-6" />
+              <Link
+                to={`/project/${selectedTransaction.project.id}`}
+                className="flex gap-3 items-center"
+              >
+                {selectedTransaction?.project.logo ? (
+                  <img
+                    src={`${import.meta.env.VITE_BACKEND_URL}${
+                      selectedTransaction?.project.logo
+                    }`}
+                    alt="logo"
+                    className="w-6 h-6 mr-2 rounded-full object-cover text-[10px] border shadow-md overflow-hidden shrink-0"
+                  />
+                ) : (
+                  <FaRegBuilding className="w-6 h-6 mr-5 rounded-full" />
+                )}
                 <span className="font-medium text-black">
-                  <p>{selectedTransaction.projectName}</p>
-                  <p className="text-sm text-gray-500">Pertanian</p>
+                  <p>{selectedTransaction.project.name}</p>
+                  <p className="text-sm text-gray-500">
+                    {selectedTransaction.project.type_display}
+                  </p>
                 </span>
               </Link>
               <span
                 className={`px-2 py-1 rounded text-xs font-semibold ${
-                  selectedTransaction.status === "Sukses"
+                  selectedTransaction.status_display === "Berhasil"
                     ? "bg-green-100 text-green-600"
                     : "bg-yellow-100 text-yellow-600"
                 }`}
               >
-                {selectedTransaction.status}
+                {selectedTransaction.status_display}
               </span>
             </div>
 
@@ -96,28 +101,38 @@ const Transaction = () => {
               <div className="flex flex-col">
                 <span className="text-sm text-gray-500">Jumlah Investasi</span>
                 <span className="text-lg font-semibold text-black">
-                  Rp {selectedTransaction.investmentAmount.toLocaleString()}
+                  {Number(selectedTransaction.amount).toLocaleString("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0,
+                  })}
                 </span>
               </div>
 
               <div className="flex flex-col">
                 <span className="text-sm text-gray-500">Metode Pembayaran</span>
                 <span className="text-lg font-semibold text-black">
-                  {selectedTransaction.paymentMethod}
+                  {selectedTransaction.payment_method_display}
                 </span>
               </div>
 
               <div className="flex flex-col">
                 <span className="text-sm text-gray-500">Tanggal Transaksi</span>
                 <span className="text-lg font-semibold text-black">
-                  {selectedTransaction.transactionDate}
+                  {new Date(
+                    selectedTransaction.transaction_date
+                  ).toLocaleDateString("id-ID", {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                  })}
                 </span>
               </div>
 
               <div className="flex flex-col">
                 <span className="text-sm text-gray-500">Waktu Transaksi</span>
                 <span className="text-lg font-semibold text-black">
-                  {selectedTransaction.transactionTime}
+                  {selectedTransaction.transaction_date.slice(11, 19)}
                 </span>
               </div>
 
@@ -125,12 +140,12 @@ const Transaction = () => {
                 <span className="text-sm text-gray-500">Tipe Transaksi</span>
                 <span
                   className={`text-lg font-semibold ${
-                    selectedTransaction.transactionType === "Pemasukan"
-                      ? "text-green-600"
-                      : "text-red-600"
+                    selectedTransaction.transaction_type_display === "Berhasil"
+                      ? "text-red-600"
+                      : "text-green-600"
                   }`}
                 >
-                  {selectedTransaction.transactionType}
+                  {selectedTransaction.transaction_type_display}
                 </span>
               </div>
             </div>
@@ -142,25 +157,40 @@ const Transaction = () => {
         )}
       </CardTemplate>
       <CardTemplate
-        title={"Detail Transaksi"}
+        title={"Riwayat Transaksi"}
         padding={"6"}
         titleClass={"text-xl font-semibold"}
         containerClass={"mb-8"}
         contentClass={"p-6"}
       >
-        <div className="flex flex-col gap-4">
-          {currentTransactions.map((transaction) => (
-            <CardTransaction
-              key={transaction.id}
-              transaction={transaction}
-              onSelectedTransaction={handleSelectTransaction}
-              selectedTransaction={selectedTransaction}
-            />
-          ))}
-        </div>
-        <div className="mt-3">
-          <Pagination page={page} totalPages={totalPages} setPage={setPage} />
-        </div>
+        {loading && (
+          <div className="w-full text-center text-gray-500">Memuat...</div>
+        )}
+        {!loading && transactions.length === 0 ? (
+          <div className="w-full text-center text-gray-500">
+            Tidak ada data Transaksi.
+          </div>
+        ) : (
+          <>
+            <div className="flex flex-col gap-4">
+              {currentTransactions.map((transaction) => (
+                <CardTransaction
+                  key={transaction.id}
+                  transaction={transaction}
+                  onSelectedTransaction={handleSelectTransaction}
+                  selectedTransaction={selectedTransaction}
+                />
+              ))}
+            </div>
+            <div className="mt-3">
+              <Pagination
+                page={page}
+                totalPages={Math.ceil(transactions.length / 5)}
+                setPage={setPage}
+              />
+            </div>
+          </>
+        )}
       </CardTemplate>
     </>
   );

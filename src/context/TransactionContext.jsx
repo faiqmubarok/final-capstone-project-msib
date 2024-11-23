@@ -14,9 +14,14 @@ export const TransactionProvider = ({ children }) => {
     navigate("/transaction");
   };
 
+  const resetTransaction = () => {
+    setSelectedTransaction(null);
+  };
+  
+
   return (
     <TransactionContext.Provider
-      value={{ selectedTransaction, handleSelectTransaction }}
+      value={{ selectedTransaction, handleSelectTransaction, resetTransaction }}
     >
       {children}
     </TransactionContext.Provider>

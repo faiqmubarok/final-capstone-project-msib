@@ -6,10 +6,12 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoPersonOutline } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
+import { useTransaction } from "../../context/TransactionContext";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
+  const { resetTransaction } = useTransaction();
   const [user, setUser] = useState({
     name: "",
     job: "",
@@ -27,6 +29,7 @@ const DropdownUser = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("authToken");
+    resetTransaction();
     navigate("/");
   };
 

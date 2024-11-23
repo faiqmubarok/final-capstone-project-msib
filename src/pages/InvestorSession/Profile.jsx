@@ -53,7 +53,12 @@ const Profile = () => {
         noKtp: response.data.no_ktp || "",
         job: response.data.job || "",
         lastUpdate: response.data.last_update || "",
-        dateJoined: response.data.date_joined.slice(0, 10) || "",
+        dateJoined:
+          new Date(response.data.date_joined).toLocaleDateString("id-ID", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          }) || "",
         image: response.data.photoProfile
           ? `${import.meta.env.VITE_BACKEND_URL}${response.data.photoProfile}`
           : null,

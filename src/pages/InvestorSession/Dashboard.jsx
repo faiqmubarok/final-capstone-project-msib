@@ -1,5 +1,4 @@
 import CardDataStats from "../../components/Card/CardDataStats";
-import { useEffect, useState } from "react";
 import { GoProjectRoadmap } from "react-icons/go";
 import { PiMoneyWavy } from "react-icons/pi";
 import { MdAttachMoney } from "react-icons/md";
@@ -7,12 +6,13 @@ import { GrLineChart } from "react-icons/gr";
 import TopProject from "../../components/Table/TopProject";
 import PieChart from "../../components/Charts/PieChart";
 import CardTemplate from "../../components/Card/CardTemplate";
-import dataTransaction from "../../data/dummy-transaction.json";
 import CardTransaction from "../../components/Card/CardTransaction";
 import LineChart from "../../components/Charts/LineChart";
+import useFetchTransaction from "../../hooks/useFetchTransaction";
 
 const DashboardPage = () => {
-  const [transactions, setTransactions] = useState([]);
+  const userId = JSON.parse(sessionStorage.getItem("authToken")).user.id;
+  const { transactions, loading } = useFetchTransaction({ userId });
 
   const dataStats = {
     project: {
@@ -31,10 +31,6 @@ const DashboardPage = () => {
       rate: "+4,42%",
     },
   };
-
-  useEffect(() => {
-    setTransactions(dataTransaction.transaction);
-  }, []);
 
   return (
     <>
@@ -93,12 +89,26 @@ const DashboardPage = () => {
             padding={"5"}
             titleClass={"text-xl font-semibold"}
             contentClass={
-              "md:max-h-[370px] overflow-y-auto space-y-4 p-5 no-scrollbar"
+              "md:h-[370px] overflow-y-auto space-y-4 p-5 no-scrollbar"
             }
           >
-            {transactions.slice(0, 5).map((transaction) => (
-              <CardTransaction key={transaction.id} transaction={transaction} />
-            ))}
+            {loading && (
+              <div className="w-full text-center text-gray-500">Memuat...</div>
+            )}
+            {!loading && transactions.length === 0 ? (
+              <div className="w-full text-center text-gray-500">
+                Tidak ada data Transaksi.
+              </div>
+            ) : (
+              <>
+                {transactions.slice(0, 5).map((transaction) => (
+                  <CardTransaction
+                    key={transaction.id}
+                    transaction={transaction}
+                  />
+                ))}
+              </>
+            )}
           </CardTemplate>
         </div>
         <div className="col-span-12 xl:col-span-7">
