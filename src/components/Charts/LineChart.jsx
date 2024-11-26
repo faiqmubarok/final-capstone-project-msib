@@ -1,22 +1,20 @@
 import { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
+import propTypes from "prop-types";
 
-const InvestmentLineChart = () => {
-  const data = [
-    {
-      bulan: "Jan",
-      investasi: 10000000,
-    },
-  ];
-
+const InvestmentLineChart = ({ data, loading }) => {
   const [investment, setInvestment] = useState([]);
   const [month, setMonth] = useState([]);
 
   useEffect(() => {
-    setInvestment(data.map((item) => item.investasi)); // Ambil investasi dari data
-    setMonth(data.map((item) => item.bulan)); // Ambil bulan dari data
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Hanya jalankan sekali saat komponen di-mount
+    if (!loading && data.length > 0) {
+      setInvestment(data.map((item) => item.investasi || 0)); // Gunakan 0 jika `investasi` tidak ada
+      setMonth(data.map((item) => item.bulan || "")); // Gunakan string kosong jika `bulan` tidak ada
+    } else {
+      setInvestment([]);
+      setMonth([]);
+    }
+  }, [data, loading]);
 
   const chartData = {
     series: [
@@ -64,16 +62,23 @@ const InvestmentLineChart = () => {
 
   return (
     <div>
-      {investment.length > 0 && month.length > 0 ? (
+      {loading || !investment.length || !month.length ? (
+        <p>Memuat...</p> // Tampilkan loading jika masih menunggu atau data kosong
+      ) : (
         <ReactApexChart
           options={chartData.options}
           series={chartData.series}
           type="line"
           height={400}
         />
-      ) : null}
+      )}
     </div>
   );
+};
+
+InvestmentLineChart.propTypes = {
+  data: propTypes.array,
+  loading: propTypes.bool,
 };
 
 export default InvestmentLineChart;

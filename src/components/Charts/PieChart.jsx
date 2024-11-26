@@ -1,32 +1,47 @@
 import Chart from "react-apexcharts";
+import propTypes from "prop-types";
 
-const PieChart = () => {
+const PieChart = ({ dataDistribution }) => {
+  const labels = dataDistribution?.map((item) => item.label);
+  const chartSeries = dataDistribution?.map((item) => item.total_investment);
+
+  if (!chartSeries || chartSeries.every((item) => item === 0)) {
+    return <div className="text-center text-gray-500">Belum ada investasi</div>;
+  }
+
   const chartOptions = {
     chart: {
       type: "donut", // Set tipe chart ke donut
     },
-    labels: ["Pertanian", "Perikanan", "Peternakan"],
-    colors: ["#16a34a", "#2563eb", "#ca8a04"],
+    labels: labels, // Gunakan labels yang sudah diproses dari dataDistribution
+    colors: ["#16a34a", "#2563eb", "#ca8a04"], // Tambahkan atau sesuaikan warna jika kategori bertambah
     legend: {
       position: "bottom",
     },
     tooltip: {
       y: {
-        formatter: (value) => `Rp. ${value.toLocaleString()}`,
+        formatter: (value) => `Rp. ${value.toLocaleString()}`, // Format angka menjadi format rupiah
       },
     },
   };
 
-  const chartSeries = [10000000, 5000000, 5000000];
-
   return (
     <Chart
       options={chartOptions}
-      series={chartSeries}
-      type="donut" 
+      series={chartSeries} // Gunakan series yang sudah diproses dari dataDistribution
+      type="donut"
       width="100%"
     />
   );
+};
+
+PieChart.propTypes = {
+  dataDistribution: propTypes.arrayOf(
+    propTypes.shape({
+      label: propTypes.string.isRequired,
+      total_investment: propTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default PieChart;

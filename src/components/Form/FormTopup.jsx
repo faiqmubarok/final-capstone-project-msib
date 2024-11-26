@@ -51,12 +51,12 @@ const FormTopup = ({ setIsModalOpen }) => {
       const dataToSend = {
         user_id: Number(userId),
         project_id: id,
-        amount: dataTopUp.amount,
+        amount: parseInt(dataTopUp.amount, 10), 
         payment_method: dataTopUp.paymentMethod,
       };
-  
+
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/transactions/topup/`, 
+        `${import.meta.env.VITE_BACKEND_URL}/transactions/topup/`,
         dataToSend
       );
 
@@ -64,9 +64,11 @@ const FormTopup = ({ setIsModalOpen }) => {
         setIsModalOpen(false);
         showAlert("success", "Setor dana berhasil!");
       }
-      
     } catch (error) {
-      console.error("Error posting data:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error posting data:",
+        error.response ? error.response.data : error.message
+      );
       showAlert("error", "Terjadi kesalahan saat mengirim data.");
     }
   };

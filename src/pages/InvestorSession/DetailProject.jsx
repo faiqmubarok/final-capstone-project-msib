@@ -174,7 +174,21 @@ const DetailProject = () => {
                 >
                   <PiTarget className="w-6 h-6 text-greenPrimary" />
                 </CardDataStats>
-                <CardDataStats total={"Dana Kelola"} title={"0"}>
+                <CardDataStats
+                  total={"Dana Kelola"}
+                  title={
+                    project?.project?.invested_amount
+                      ? parseInt(
+                          project.project.invested_amount.toString().split(".")[0],
+                          10
+                        ).toLocaleString("id-ID", {
+                          style: "currency",
+                          currency: "IDR",
+                          minimumFractionDigits: 0,
+                        })
+                      : "Rp 0"
+                  }
+                >
                   <PiMoneyWavy className="w-6 h-6 text-greenPrimary" />
                 </CardDataStats>
               </div>

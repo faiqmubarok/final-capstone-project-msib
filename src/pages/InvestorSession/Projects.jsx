@@ -4,6 +4,7 @@ import TableContainer from "../../components/Table/TableContainer";
 import SearchProject from "../../components/Search & Select/SearchProject";
 import FilterProjects from "../../components/Dropdown/FilterProjects";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import TableList from "../../components/Table/TableList";
 
 const ProjectPage = () => {
   const [allProjects, setAllProjects] = useState([]); // Semua proyek
@@ -12,18 +13,21 @@ const ProjectPage = () => {
   const [typeFilter, setTypeFilter] = useState("Semua"); // Filter tipe
   const [statusFilter, setStatusFilter] = useState("Semua"); // Filter status
   const [searchKey, setSearchKey] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
+        setLoading(true);
         const response = await fetch(
           `${import.meta.env.VITE_BACKEND_URL}/projects/allProject/`
         );
         const data = await response.json();
         setAllProjects(Array.isArray(data.data) ? data.data : []);
-        console.log(data);
       } catch (error) {
         console.error("Fetch Error:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchProjects();
@@ -128,12 +132,14 @@ const ProjectPage = () => {
             "Keuntungan",
             "Status",
           ]}
-          items={filteredProjects.slice(
-            (currentPage - 1) * 10,
-            currentPage * 10
-          )}
-          filteredProjects={filteredProjects}
-        />
+          loading={loading}
+        >
+          {filteredProjects
+            .slice((currentPage - 1) * 10, currentPage * 10)
+            .map((item, index) => (
+              <TableList key={index} item={item} />
+            ))}
+        </TableContainer>
         <Pagination
           page={currentPage}
           totalPages={Math.ceil(filteredProjects.length / 10)}

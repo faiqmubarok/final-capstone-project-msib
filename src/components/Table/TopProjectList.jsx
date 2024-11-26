@@ -2,7 +2,6 @@ import propTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { FaRegBuilding } from "react-icons/fa";
 
-// Fungsi untuk mengonversi dana ke format singkat
 const formatDana = (dana) => {
   const amount = parseInt(dana.split(/[.,]/)[0], 10); // Mengambil bagian sebelum titik atau koma
 
@@ -18,7 +17,7 @@ const formatDana = (dana) => {
   }
 };
 
-const TableList = ({ item }) => {
+const TopProjectList = ({ item }) => {
   const navigate = useNavigate();
 
   return (
@@ -29,7 +28,7 @@ const TableList = ({ item }) => {
       <td className="px-6 py-4 font-medium whitespace-nowrap flex items-center">
         {item.logo ? (
           <img
-            src={item.logo}
+            src={`${import.meta.env.VITE_BACKEND_URL}${item.logo}`}
             alt="logo"
             className="w-6 h-6 mr-2 rounded-full object-cover text-[10px] shadow-md overflow-hidden shrink-0"
           />
@@ -39,28 +38,14 @@ const TableList = ({ item }) => {
         {item.name}
       </td>
       <td className="px-6 py-4">{item.type_display}</td>
-      <td className="px-6 py-4">{item.location}</td>
       <td className="px-6 py-4">{formatDana(item.invested_amount)}</td>
       <td className="px-6 py-4">{item.profit}%</td>
-      <td className="px-4 py-2">
-        <span
-          className={`text-white rounded-full px-2 py-1 text-xs text-nowrap ${
-            item.status_display === "Tersedia"
-              ? "bg-green-600"
-              : item.status_display === "Tidak tersedia"
-              ? "bg-red-600"
-              : "bg-yellow-600"
-          }`}
-        >
-          {item.status_display}
-        </span>
-      </td>
     </tr>
   );
 };
 
-TableList.propTypes = {
+TopProjectList.propTypes = {
   item: propTypes.object.isRequired,
 };
 
-export default TableList;
+export default TopProjectList;

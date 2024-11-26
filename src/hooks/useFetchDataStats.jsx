@@ -1,35 +1,35 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useFetchTransaction = ({ userId }) => {
-  const [transactions, setTransactions] = useState([]);
-  const [loading, setLoading] = useState(false);
+const useFetchDataStats = ({ userId }) => {
+  const [dataStats, setDataStats] = useState(null);
+  const [isloading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const getTransactions = async () => {
-      setLoading(true);
+    const getDataStats = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
           `${
             import.meta.env.VITE_BACKEND_URL
-          }/transactions/getTransaction/${userId}/`
+          }/portfolio/investmentStats/${userId}/`
         );
         const data = response.data;
-        setTransactions(data);
+        setDataStats(data);
       } catch (error) {
         console.error("Error fetching transactions:", error);
         setError(error.message);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
     if (userId) {
-      getTransactions();
+      getDataStats();
     }
   }, [userId]);
 
-  return { transactions, loading, error };
+  return { dataStats, isloading, error };
 };
 
-export default useFetchTransaction;
+export default useFetchDataStats;

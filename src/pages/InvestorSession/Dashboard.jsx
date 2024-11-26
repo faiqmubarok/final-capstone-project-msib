@@ -9,57 +9,42 @@ import CardTemplate from "../../components/Card/CardTemplate";
 import CardTransaction from "../../components/Card/CardTransaction";
 import LineChart from "../../components/Charts/LineChart";
 import useFetchTransaction from "../../hooks/useFetchTransaction";
+import useFetchDataStats from "../../hooks/useFetchDataStats";
 
 const DashboardPage = () => {
   const userId = JSON.parse(sessionStorage.getItem("authToken")).user.id;
+  const { dataStats } = useFetchDataStats({ userId });
   const { transactions, loading } = useFetchTransaction({ userId });
-
-  const dataStats = {
-    project: {
-      total: 8,
-    },
-    portfolio: {
-      total: 20517379,
-      rate: "+4,42%",
-    },
-    modal: {
-      total: 20000000,
-      rate: "+4,42%",
-    },
-    profit: {
-      total: 517379,
-      rate: "+4,42%",
-    },
-  };
 
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 xl:gap-7">
         <CardDataStats
-          total={dataStats.project.total.toString()}
+          total={dataStats?.project_count.toString()}
           title="Proyek"
         >
           <GoProjectRoadmap className="w-6 h-6 text-greenPrimary" />
         </CardDataStats>
         <CardDataStats
-          total={`Rp. ${dataStats.portfolio.total.toLocaleString("id-ID")}`}
+          total={`Rp. ${dataStats?.total_portfolio_value.toLocaleString(
+            "id-ID"
+          )}`}
           title="Nilai Portofolio"
-          levelUp={true}
-          rate="+4,42%"
         >
           <PiMoneyWavy className="w-6 h-6 text-greenPrimary" />
         </CardDataStats>
         <CardDataStats
-          total={`Rp. ${dataStats.modal.total.toLocaleString("id-ID")}`}
+          total={`Rp. ${dataStats?.total_modal.toLocaleString("id-ID")}`}
           title="Total Modal"
         >
           <MdAttachMoney className="w-6 h-6 text-greenPrimary" />
         </CardDataStats>
         <CardDataStats
-          total={`Rp. ${dataStats.profit.total.toLocaleString("id-ID")}`}
+          total={`Rp. ${dataStats?.profit.toLocaleString("id-ID")}`}
           title="Keuntungan"
-          levelDown
-          rate="+4,42%"
+          levelUp={dataStats?.persentage_profit >= 0 === true}
+          levelDown={dataStats?.persentage_profit < 0 === true}
+          rate={`${dataStats?.persentage_profit.toFixed(2)}%`}
         >
           <GrLineChart className="w-6 h-6 text-greenPrimary" />
         </CardDataStats>
@@ -77,7 +62,11 @@ const DashboardPage = () => {
             titleClass={"text-xl font-semibold"}
             containerClass={"h-full"}
           >
-            <PieChart />
+            {dataStats === null ? (
+              <div className="w-full text-center text-gray-500">Memuat...</div>
+            ) : (
+              <PieChart dataDistribution={dataStats?.portfolio_distribution} />
+            )}
           </CardTemplate>
         </div>
       </div>
@@ -113,7 +102,11 @@ const DashboardPage = () => {
         </div>
         <div className="col-span-12 xl:col-span-7">
           <div className="bg-white shadow-md rounded-sm p-2">
-            <LineChart />
+            {dataStats === null ? (
+              <div className="w-full text-center text-gray-500">Memuat...</div>
+            ) : (
+              <LineChart data={dataStats?.investment_chart_data} />
+            )}
           </div>
         </div>
       </div>
