@@ -56,7 +56,7 @@ const ScrollToTop = ({ scrollableRef }) => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="p-4 bg-orangePrimary text-white rounded-full shadow-lg hover:bg-orangeSecondary transition duration-300"
+          className="p-3.5 bg-orangePrimary text-white rounded-full shadow-lg hover:bg-orangeSecondary transition duration-300"
         >
           <IoIosArrowUp className="w-4 h-4" />
         </button>

@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import propTypes from "prop-types";
 import { useAlert } from "../../context/AlertContext";
+import { useNavigate } from "react-router-dom";
 
 const FormTopup = ({ setIsModalOpen }) => {
+  const navigate = useNavigate();
   const { showAlert } = useAlert();
   const { id } = useParams();
   const [dataTopUp, setDataTopUp] = useState({
@@ -63,6 +65,7 @@ const FormTopup = ({ setIsModalOpen }) => {
       if (response.status === 201) {
         setIsModalOpen(false);
         showAlert("success", "Setor dana berhasil!");
+        navigate("/portfolio");
       }
     } catch (error) {
       console.error(
@@ -139,8 +142,8 @@ const FormTopup = ({ setIsModalOpen }) => {
           <input
             type="radio"
             name="paymentMethod"
-            value="bank_transfer"
-            checked={dataTopUp.paymentMethod === "bank_transfer"}
+            value="Bank Transfer"
+            checked={dataTopUp.paymentMethod === "Bank Transfer"}
             onChange={handleInputChange}
           />
           <span>Bank Transfer</span>
@@ -149,8 +152,8 @@ const FormTopup = ({ setIsModalOpen }) => {
           <input
             type="radio"
             name="paymentMethod"
-            value="e_wallet"
-            checked={dataTopUp.paymentMethod === "e_wallet"}
+            value="E-Wallet"
+            checked={dataTopUp.paymentMethod === "E-Wallet"}
             onChange={handleInputChange}
           />
           <span>E-Wallet (Gopay, OVO, dll.)</span>
@@ -159,8 +162,8 @@ const FormTopup = ({ setIsModalOpen }) => {
           <input
             type="radio"
             name="paymentMethod"
-            value="credit_card"
-            checked={dataTopUp.paymentMethod === "credit_card"}
+            value="Credit Card"
+            checked={dataTopUp.paymentMethod === "Credit Card"}
             onChange={handleInputChange}
           />
           <span>Kartu Kredit</span>

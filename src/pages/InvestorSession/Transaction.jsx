@@ -99,7 +99,7 @@ const Transaction = () => {
             {/* Informasi Transaksi */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Jumlah Investasi</span>
+                <span className="text-sm text-gray-500">Jumlah Transaksi</span>
                 <span className="text-lg font-semibold text-black">
                   {Number(selectedTransaction.amount).toLocaleString("id-ID", {
                     style: "currency",
@@ -112,7 +112,7 @@ const Transaction = () => {
               <div className="flex flex-col">
                 <span className="text-sm text-gray-500">Metode Pembayaran</span>
                 <span className="text-lg font-semibold text-black">
-                  {selectedTransaction.payment_method_display}
+                  {selectedTransaction.payment_method}
                 </span>
               </div>
 

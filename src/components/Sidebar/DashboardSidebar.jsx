@@ -4,7 +4,12 @@ import { NavLink } from "react-router-dom";
 import Logo from "../Logo";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
-const DashboardSidebar = ({ mainRoute, listMenu, sidebarOpen, setSidebarOpen }) => {
+const DashboardSidebar = ({
+  mainRoute,
+  listMenu,
+  sidebarOpen,
+  setSidebarOpen,
+}) => {
   const sidebar = useRef(null);
   const trigger = useRef(null);
 
@@ -67,6 +72,7 @@ const DashboardSidebar = ({ mainRoute, listMenu, sidebarOpen, setSidebarOpen }) 
             {listMenu.map((item, index) => (
               <li key={index}>
                 <NavLink
+                  onClick={() => setSidebarOpen(false)}
                   to={item.link}
                   className={({ isActive }) =>
                     `group relative flex items-center gap-2.5 rounded-lg py-3 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-orangePrimary ${

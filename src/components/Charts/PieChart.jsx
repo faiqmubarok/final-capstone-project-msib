@@ -26,12 +26,14 @@ const PieChart = ({ dataDistribution }) => {
   };
 
   return (
-    <Chart
-      options={chartOptions}
-      series={chartSeries} // Gunakan series yang sudah diproses dari dataDistribution
-      type="donut"
-      width="100%"
-    />
+    <div className="mx-auto my-0 max-w-96">
+      <Chart
+        options={chartOptions}
+        series={chartSeries} // Gunakan series yang sudah diproses dari dataDistribution
+        type="donut"
+        width="100%"
+      />
+    </div>
   );
 };
 

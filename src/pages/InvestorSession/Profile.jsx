@@ -45,33 +45,34 @@ const Profile = () => {
       const response = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/users/getUser/${userId}/`
       );
+      const data = response.data;
       setUserProfile({
         ...userProfile,
-        email: response.data.email || "",
-        name: response.data.name || "",
-        phone: response.data.phone || "",
-        noKtp: response.data.no_ktp || "",
-        job: response.data.job || "",
-        lastUpdate: response.data.last_update || "",
+        email: data.email || "",
+        name: data.name || "",
+        phone: data.phone || "",
+        noKtp: data.no_ktp || "",
+        job: data.job || "",
+        lastUpdate: data.last_update || "",
         dateJoined:
-          new Date(response.data.date_joined).toLocaleDateString("id-ID", {
+          new Date(data.date_joined).toLocaleDateString("id-ID", {
             day: "2-digit",
             month: "long",
             year: "numeric",
           }) || "",
-        image: response.data.photoProfile
+        image: data.photoProfile
           ? `${import.meta.env.VITE_BACKEND_URL}${response.data.photoProfile}`
           : null,
         finance: {
-          bank: response.data.finance.bank || "",
-          noRekening: response.data.finance.no_rekening || "",
+          bank: data.finance.bank || "",
+          noRekening: data.finance.no_rekening || "",
         },
         address: {
-          province: response.data.address.province || "",
-          city: response.data.address.city || "",
-          district: response.data.address.district || "",
-          subDistrict: response.data.address.sub_district || "",
-          postalCode: response.data.address.postal_code || "",
+          province: data.address.province || "",
+          city: data.address.city || "",
+          district: data.address.district || "",
+          subDistrict: data.address.sub_district || "",
+          postalCode: data.address.postal_code || "",
         },
       });
     } catch (error) {
@@ -83,7 +84,8 @@ const Profile = () => {
   const updateUser = async (dataToSend) => {
     try {
       const userId = JSON.parse(sessionStorage.getItem("authToken")).user.id;
-      await axios.patch(
+      console.log("data to send", dataToSend)
+      const response = await axios.patch(
         `${import.meta.env.VITE_BACKEND_URL}/users/updateUser/${userId}/`,
         dataToSend,
         {
@@ -92,9 +94,10 @@ const Profile = () => {
           },
         }
       );
+      console.log("data response", response.data);
       showAlert("success", "Data berhasil diupdate");
-      await fetchUser();
-      setNewSessionStorage();
+      fetchUser();
+      setNewSessionStorage(response?.data);
     } catch (error) {
       console.log(error);
       showAlert("error", "Gagal mengupdte data.");
@@ -125,14 +128,11 @@ const Profile = () => {
     updateUser(dataToSend);
   };
 
-  const setNewSessionStorage = () => {
+  const setNewSessionStorage = (response) => {
     const sessionStorageData = JSON.parse(sessionStorage.getItem("authToken"));
-    sessionStorageData.user.name = userProfile.name;
-    sessionStorageData.user.job = userProfile.job;
-    sessionStorageData.user.photoProfile = userProfile.image
-      ? `media/profilePictures/${userProfile.image.name}`
-      : "";
-    console.log(sessionStorageData.user.photoProfile);
+    sessionStorageData.user.name = response?.name;
+    sessionStorageData.user.job = response?.job;
+    sessionStorageData.user.photoProfile = response?.photoProfile ? response.photoProfile : "";
     sessionStorage.setItem("authToken", JSON.stringify(sessionStorageData));
   };
 

@@ -23,7 +23,6 @@ const TopProject = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/projects/${endPoint}/`
         );
-        console.log(response.data);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching project:", error);
@@ -36,12 +35,12 @@ const TopProject = () => {
   }, [filter]);
 
   return (
-    <div className="rounded-sm border border-gray-50 bg-white px-5 pt-6 pb-2.5 shadow-sm sm:px-7 no-scrollbar lg:min-h-[445px]">
-      <div className="flex justify-between items-center mb-6">
-        <h4 className=" text-xl font-semibold text-black">
+    <div className="rounded-sm border border-gray-50 bg-white px-4 pt-6 pb-2.5 shadow-sm sm:px-6 no-scrollbar lg:min-h-[445px]">
+      <div className="flex justify-between items-center mb-6 gap-3">
+        <h4 className="text-xl font-semibold text-black w-2/3 md:w-full">
           Rekomendasi Proyek
         </h4>
-        <div className="flex max-w-45 justify-end">
+        <div className="flex justify-end w-1/3 md:w-full">
           <FilterProjects
             selectedFilter={filter}
             setSelectedFilter={setFilter}

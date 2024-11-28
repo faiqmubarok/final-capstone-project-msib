@@ -26,9 +26,9 @@ const CostumerPage = () => {
               Petani, Nelayan, dan Peternak bisa berkembang bersama kami dengan
               modal yang cepat dan transparan.
             </p>
-            <button className="bg-orangePrimary text-white font-semibold py-3 px-8 rounded-full hover:bg-orangeSecondary transition duration-300 shadow-lg hover:shadow-xl">
+            <a href="https://forms.gle/iLpV9n7k6EZ2M1Y1A" target="_blank" className="noopener noreferrer bg-orangePrimary text-white font-semibold py-3 px-8 rounded-full hover:bg-orangeSecondary transition duration-300 shadow-lg hover:shadow-xl">
               Ajukan Sekarang
-            </button>
+            </a>
           </div>
 
           {/* Bagian Gambar */}
@@ -183,9 +183,9 @@ const CostumerPage = () => {
           <p className=" mb-8">
             Daftarkan diri Anda sekarang dan ajukan pinjaman untuk usaha Anda.
           </p>
-          <button className="bg-orangePrimary text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-orange-500 hover:scale-105 transition-transform duration-300">
+          <a href="https://forms.gle/iLpV9n7k6EZ2M1Y1A" target="_blank" className=" noopener noreferrer bg-orangePrimary text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-orange-500 hover:scale-105 transition-transform duration-300">
             Ajukan Pinjaman Sekarang
-          </button>
+          </a>
         </div>
         {/* Decorative Element */}
         <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-10 rounded-full w-80 h-80"></div>

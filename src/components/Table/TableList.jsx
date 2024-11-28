@@ -2,24 +2,24 @@ import propTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { FaRegBuilding } from "react-icons/fa";
 
-// Fungsi untuk mengonversi dana ke format singkat
-const formatDana = (dana) => {
-  const amount = parseInt(dana.split(/[.,]/)[0], 10); // Mengambil bagian sebelum titik atau koma
-
-  if (amount >= 1000000000) {
-    // Jika dana lebih dari atau sama dengan 1 miliar
-    return `${(amount / 1000000000).toFixed(1)} M`;
-  } else if (amount >= 1000000) {
-    // Jika dana lebih dari atau sama dengan 1 juta
-    return `${(amount / 1000000).toFixed(1)} Jt`;
-  } else {
-    // Jika dana kurang dari 1 juta
-    return `${amount.toLocaleString()}`;
-  }
-};
-
 const TableList = ({ item }) => {
   const navigate = useNavigate();
+
+  // Fungsi untuk mengonversi dana ke format singkat
+  const formatDana = (dana) => {
+    const amount = parseInt(dana.split(/[.,]/)[0], 10); // Mengambil bagian sebelum titik atau koma
+
+    if (amount >= 1000000000) {
+      // Jika dana lebih dari atau sama dengan 1 miliar
+      return `${(amount / 1000000000).toFixed(1)} M`;
+    } else if (amount >= 1000000) {
+      // Jika dana lebih dari atau sama dengan 1 juta
+      return `${(amount / 1000000).toFixed(1)} Jt`;
+    } else {
+      // Jika dana kurang dari 1 juta
+      return `${amount.toLocaleString()}`;
+    }
+  };
 
   return (
     <tr
