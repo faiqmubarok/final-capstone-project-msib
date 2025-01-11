@@ -23,8 +23,12 @@ const DropdownUser = () => {
     setUser({
       name: storedAuthData.user.name,
       job: storedAuthData.user.job,
-      photoProfile: storedAuthData.user.photoProfile ? `http://localhost:8000/${storedAuthData.user.photoProfile}` : "",
-    })
+      photoProfile: storedAuthData.user.photoProfile
+        ? `${import.meta.env.VITE_BACKEND_URL}/${
+            storedAuthData.user.photoProfile
+          }`
+        : "",
+    });
   }, []);
 
   const handleLogout = () => {
@@ -50,7 +54,13 @@ const DropdownUser = () => {
           </span>
 
           <span className="h-12 w-12 rounded-full overflow-hidden drop-shadow-md">
-            <img className="h-full w-full" src={user.photoProfile ? user.photoProfile : images.userPhotoProfile} alt="userProfile" />
+            <img
+              className="h-full w-full"
+              src={
+                user.photoProfile ? user.photoProfile : images.userPhotoProfile
+              }
+              alt="userProfile"
+            />
           </span>
 
           <IoIosArrowDown className="w-4 h-4" />
