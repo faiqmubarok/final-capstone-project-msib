@@ -1,16 +1,14 @@
-import { useEffect, useState, Suspense, lazy } from "react";
+import { useEffect, useState } from "react";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import axios from "axios";
 import { id } from "date-fns/locale";
 import { useAlert } from "../../context/AlertContext";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import CardTemplate from "../../components/Card/CardTemplate";
-const FormAddress = lazy(() => import("../../components/Form/FormAddress"));
-const FormPersonal = lazy(() => import("../../components/Form/FormPersonal"));
-const FormFinance = lazy(() => import("../../components/Form/FormFinance"));
-const FormPhotoProfile = lazy(() =>
-  import("../../components/Form/FormPhotoProfile")
-);
+import FormAddress from "../../components/Form/FormAddress";
+import FormPersonal from "../../components/Form/FormPersonal";
+import FormFinance from "../../components/Form/FormFinance";
+import FormPhotoProfile from "../../components/Form/FormPhotoProfile";
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState({
@@ -84,7 +82,7 @@ const Profile = () => {
   const updateUser = async (dataToSend) => {
     try {
       const userId = JSON.parse(sessionStorage.getItem("authToken")).user.id;
-      console.log("data to send", dataToSend)
+      console.log("data to send", dataToSend);
       const response = await axios.patch(
         `${import.meta.env.VITE_BACKEND_URL}/users/updateUser/${userId}/`,
         dataToSend,
@@ -132,7 +130,9 @@ const Profile = () => {
     const sessionStorageData = JSON.parse(sessionStorage.getItem("authToken"));
     sessionStorageData.user.name = response?.name;
     sessionStorageData.user.job = response?.job;
-    sessionStorageData.user.photoProfile = response?.photoProfile ? response.photoProfile : "";
+    sessionStorageData.user.photoProfile = response?.photoProfile
+      ? response.photoProfile
+      : "";
     sessionStorage.setItem("authToken", JSON.stringify(sessionStorageData));
   };
 
@@ -177,20 +177,12 @@ const Profile = () => {
             titleClass={"text-base"}
             contentClass={"p-7"}
           >
-            <Suspense
-              fallback={
-                <div className="w-full p-4 flex justify-center items-center font-medium">
-                  Memuat...
-                </div>
-              }
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <FormPersonal
-                  formData={userProfile}
-                  handleInputChange={handleInputChange}
-                />
-              </div>
-            </Suspense>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <FormPersonal
+                formData={userProfile}
+                handleInputChange={handleInputChange}
+              />
+            </div>
           </CardTemplate>
 
           {/* Address Information */}
@@ -201,21 +193,13 @@ const Profile = () => {
             titleClass={"text-base"}
             contentClass={"p-7"}
           >
-            <Suspense
-              fallback={
-                <div className="w-full p-4 flex justify-center items-center font-medium">
-                  Memuat...
-                </div>
-              }
-            >
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                <FormAddress
-                  formData={userProfile}
-                  setFormData={setUserProfile}
-                  formatOptions={formatOptions}
-                />
-              </div>
-            </Suspense>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <FormAddress
+                formData={userProfile}
+                setFormData={setUserProfile}
+                formatOptions={formatOptions}
+              />
+            </div>
           </CardTemplate>
 
           {/* Finance Information */}
@@ -226,21 +210,13 @@ const Profile = () => {
             titleClass={"text-base"}
             contentClass={"p-7"}
           >
-            <Suspense
-              fallback={
-                <div className="w-full p-4 flex justify-center items-center font-medium">
-                  Memuat...
-                </div>
-              }
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <FormFinance
-                  formData={userProfile}
-                  setFormData={setUserProfile}
-                  formatOptions={formatOptions}
-                />
-              </div>
-            </Suspense>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <FormFinance
+                formData={userProfile}
+                setFormData={setUserProfile}
+                formatOptions={formatOptions}
+              />
+            </div>
           </CardTemplate>
         </section>
 
@@ -253,18 +229,10 @@ const Profile = () => {
             titleClass={"text-base"}
             contentClass={"p-7"}
           >
-            <Suspense
-              fallback={
-                <div className="w-full p-4 flex justify-center items-center font-medium">
-                  Memuat...
-                </div>
-              }
-            >
-              <FormPhotoProfile
-                formData={userProfile}
-                setFormData={setUserProfile}
-              />
-            </Suspense>
+            <FormPhotoProfile
+              formData={userProfile}
+              setFormData={setUserProfile}
+            />
           </CardTemplate>
           {/* Button Submit Changed */}
           <div className="rounded-sm border border-gray-100 bg-white shadow-md">
