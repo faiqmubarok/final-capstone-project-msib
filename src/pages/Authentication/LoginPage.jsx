@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Form/Input";
-import Password from "../../components/Form/Password.jsx";
+import Password from "../../components/Form/Password";
 import Logo from "../../components/Logo";
 import ButtonBack from "../../components/ButtonBack";
 import { useAlert } from "../../context/AlertContext";

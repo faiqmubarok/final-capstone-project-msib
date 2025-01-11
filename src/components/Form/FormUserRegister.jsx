@@ -1,5 +1,5 @@
 import propTypes from "prop-types";
-import Password from "./password";
+import Password from "./Password";
 import FormAddress from "./FormAddress";
 import FormPersonal from "./FormPersonal";
 import FormFinance from "./FormFinance";
