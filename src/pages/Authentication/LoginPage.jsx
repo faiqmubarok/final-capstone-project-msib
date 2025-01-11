@@ -90,6 +90,7 @@ const LoginPage = () => {
                 autoComplete="email"
               />
               <Password
+                id={"password"}
                 password={formUserLogin.password}
                 setPassword={(value) =>
                   setFormUserLogin((prevData) => ({
