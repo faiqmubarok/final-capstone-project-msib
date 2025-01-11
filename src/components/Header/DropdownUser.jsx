@@ -24,7 +24,7 @@ const DropdownUser = () => {
       name: storedAuthData.user.name,
       job: storedAuthData.user.job,
       photoProfile: storedAuthData.user.photoProfile
-        ? `${import.meta.env.VITE_BACKEND_URL}/${
+        ? `${import.meta.env.VITE_BACKEND_URL}${
             storedAuthData.user.photoProfile
           }`
         : "",
