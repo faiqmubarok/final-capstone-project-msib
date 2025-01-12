@@ -103,7 +103,7 @@ Kontribusi sangat dihargai! Jika Anda ingin berkontribusi, silakan ikuti langkah
 
 ## 📧 Kontak
 
-Jika Anda memiliki pertanyaan atau saran, jangan ragu untuk menghubungi kami di [email@example.com](mailto:email@example.com).
+Jika Anda memiliki pertanyaan atau saran, jangan ragu untuk menghubungi kami di [faiqmubarok@gmail.com](mailto:faiqmubarok@gmail.com).
 
 ---
 
